@@ -8,12 +8,12 @@ CONFIG += console release
 TEMPLATE = app
 SOURCES += \
 	src/directorymodel.cpp \
-	src/mainwidget.cpp \
+	src/mainwindow.cpp \
 	src/main.cpp
 
 HEADERS += \
 	src/directorymodel.h \
-	src/mainwidget.h
+	src/mainwindow.h
 
 OBJECTS_DIR = tmp/
 MOC_DIR = tmp/

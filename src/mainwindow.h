@@ -5,10 +5,15 @@
 #include <QTabWidget>
 #include <QVBoxLayout>
 #include <QTableView>
+#include <QMenu>
+#include <QMenuBar>
+#include <QMainWindow>
 #include <QtSql>
+#include <QMessageBox>
+
 #include "directorymodel.h"
 
-class MainWidget : public QWidget
+class MainWindow : public QMainWindow
 {
 	// private:
 		Q_OBJECT
@@ -19,13 +24,19 @@ class MainWidget : public QWidget
 		QTableView *m_pTableView_Directories;
 		QWidget *m_pDirectoryWidget;
 		DirectoryModel *m_pDirectoryModel;
+		QMenu *m_pMenuHelp;
+		QAction *m_pActionLicense;
 	public:
 
-		MainWidget(QWidget *parent = 0);
+		MainWindow();
 		
 	signals:
 
 	public slots:
+		
+		
+	private slots:
+		void actionLicense();
 };
 
 #endif // MAIN_WIDGET_H
