@@ -18,6 +18,7 @@
 
 #include "directorymodel.h"
 #include "filesmodel.h"
+#include "job.h"
 
 class MainWindow : public QMainWindow
 {
@@ -39,18 +40,22 @@ class MainWindow : public QMainWindow
 		QTableView *m_pTableView_Files;
 		QLineEdit *m_pLineEditSearch;
 		FilesModel *m_pFilesModel;
+		QSqlQueryModel *m_pFilesModel2;
 		QLabel *m_pLabelResult;
 		
 		QWidget *m_pJobsWidget;
 
 		QString m_sWorkDirectory;
+
+		QMap<QString, Job*> m_mapJobs;
 		
 	private:
 		void initConnection();
 		void initDirectoryTabs();
 		void initFilesTabs();
 		void initJobsTabs();
-
+		void terminateJob(QString sPath);
+		
 	public:
 
 		MainWindow(QString sWorkDirectory);

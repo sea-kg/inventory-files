@@ -131,16 +131,47 @@ void MainWindow::btnRemoveDirectory() {
     }
 
     for (int i = 0; i < listRemove.size(); i++) {
-		// delete
-		QSqlQuery query(*m_pDB);
-		query.prepare("DELETE FROM directories WHERE path = :path");
-		query.bindValue(":path", listRemove.at(i));
-		query.exec();
-
-		// todo remove scan jobs
-
-		// todo remove all indexed files from db
+		QString sPath = listRemove.at(i);
+		
+		terminateJob(sPath);
+	
+		// delete from dirs
+		{
+			QSqlQuery query(*m_pDB);
+			query.prepare("DELETE FROM directories WHERE path = :path");
+			query.bindValue(":path", sPath);
+			query.exec();
+		}
+		
+		// delete from files
+		{
+			QSqlQuery query(*m_pDB);
+			query.prepare("DELETE FROM files WHERE path LIKE :path");
+			query.bindValue(":path", sPath + "%");
+			query.exec();
+		}
 		m_pDirectoryModel->needReset();
+	}
+}
+
+// ---------------------------------------------------------------------
+
+void MainWindow::terminateJob(QString sPath) {
+	if (m_mapJobs.contains(sPath)) {
+		if (m_mapJobs[sPath]->isFinished()) {
+			std::cout << " job finished\n";
+			m_mapJobs.remove(sPath);
+			std::cout << "removed job.\n";
+		} else {
+			std::cout << "stopping job...\n";
+			Job *pJob = m_mapJobs[sPath];
+			pJob->terminate();
+			while (!pJob->isFinished()) {
+				std::cout << "stopping job...\n";
+			}
+			m_mapJobs.remove(sPath);
+			std::cout << "removed job.\n";
+		}
 	}
 }
 
@@ -158,12 +189,23 @@ void MainWindow::btnScanDirectory() {
     }
     
     for (int i = 0; i < listRemove.size(); i++) {
+		QString sPath = listRemove.at(i);
+		
 		// start scan
 		QSqlQuery query(*m_pDB);
 		query.prepare("UPDATE directories SET lastscanning = CURRENT_TIMESTAMP WHERE path = :path");
-		query.bindValue(":path", listRemove.at(i));
+		query.bindValue(":path", sPath);
 		query.exec();
-		// todo start job
+		
+		terminateJob(sPath);
+			
+		Job *pJob = new Job(m_pDB, sPath);
+		if (!m_mapJobs.contains(sPath)) {
+			m_mapJobs[sPath] = pJob;
+			pJob->start();
+		} else {
+			std::cout << " job already exists\n";
+		}
 		m_pDirectoryModel->needReset();
 	}
 }
@@ -197,7 +239,7 @@ void MainWindow::initConnection() {
 				  "comment varchar(1024), "
 				  "ext varchar(20), "
 				  "type varchar(20), "
-				  "size varchar(20), "
+				  "size integer, "
 				  "lastscanning datetime)");
 	}
 }
@@ -245,12 +287,15 @@ void MainWindow::initDirectoryTabs() {
 void MainWindow::initFilesTabs() {
 	m_pFilesWidget = new QWidget();
 	QVBoxLayout *pFilesLayout = new QVBoxLayout(m_pFilesWidget);
+	// path like
 	{
 		QHBoxLayout *pHLayout = new QHBoxLayout();
+		pHLayout->addWidget(new QLabel("path LIKE "));
+
 		m_pLineEditSearch = new QLineEdit();
 		connect(m_pLineEditSearch, SIGNAL(returnPressed()), this, SLOT(btnFilesSearch()));
 		pHLayout->addWidget(m_pLineEditSearch);
-		
+
 		QPushButton *pBtnSearch = new QPushButton("Search...");
 		pBtnSearch->setMaximumWidth(100);
 		connect(pBtnSearch, SIGNAL(clicked()), this, SLOT(btnFilesSearch()));
@@ -261,6 +306,27 @@ void MainWindow::initFilesTabs() {
 		pFilesLayout->addWidget(pWidget);
 	}
 	
+	// type like
+	{
+		QHBoxLayout *pHLayout = new QHBoxLayout();
+		pHLayout->addWidget(new QLabel("Type = "));
+
+		/*m_pLineEditSearch = new QLineEdit();
+		connect(m_pLineEditSearch, SIGNAL(returnPressed()), this, SLOT(btnFilesSearch()));
+		pHLayout->addWidget(m_pLineEditSearch);
+
+		QPushButton *pBtnSearch = new QPushButton("Search...");
+		pBtnSearch->setMaximumWidth(100);
+		connect(pBtnSearch, SIGNAL(clicked()), this, SLOT(btnFilesSearch()));
+		pHLayout->addWidget(pBtnSearch);
+		*/
+
+		QWidget *pWidget = new QWidget;
+		pWidget->setLayout(pHLayout);
+		pFilesLayout->addWidget(pWidget);
+	}
+	
+	
 	{
 		m_pLabelResult = new QLabel();
 		m_pLabelResult->setText("No filters...");
@@ -268,8 +334,19 @@ void MainWindow::initFilesTabs() {
 	}
 
 	m_pTableView_Files = new QTableView();
-	m_pFilesModel = new FilesModel(m_pDB);
-	m_pTableView_Files->setModel( m_pFilesModel );
+	// m_pFilesModel = new FilesModel(m_pDB);
+	m_pFilesModel2 = new QSqlQueryModel;
+    m_pFilesModel2->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files");
+    m_pFilesModel2->setHeaderData(0, Qt::Horizontal, tr("Name"));
+    m_pFilesModel2->setHeaderData(1, Qt::Horizontal, tr("Ext"));
+    m_pFilesModel2->setHeaderData(2, Qt::Horizontal, tr("Type"));
+    m_pFilesModel2->setHeaderData(3, Qt::Horizontal, tr("Size"));
+    m_pFilesModel2->setHeaderData(4, Qt::Horizontal, tr("Path"));
+    m_pFilesModel2->setHeaderData(5, Qt::Horizontal, tr("Comment"));
+	m_pFilesModel2->setHeaderData(6, Qt::Horizontal, tr("md5sum"));
+	m_pFilesModel2->setHeaderData(7, Qt::Horizontal, tr("Last Scanning"));
+    
+	m_pTableView_Files->setModel( m_pFilesModel2 );
 	pFilesLayout->addWidget(m_pTableView_Files);
 	m_pFilesWidget->setLayout(pFilesLayout);
 }
@@ -278,19 +355,17 @@ void MainWindow::initFilesTabs() {
 
 void MainWindow::btnFilesSearch() {
 	QString sTextSearch = m_pLineEditSearch->displayText();
-	m_pFilesModel->setSearchText(sTextSearch);
+	// m_pFilesModel->setSearchText(sTextSearch);
+	// int nFound = m_pFilesModel->foundRecords();
 
-	int nFound = m_pFilesModel->foundRecords();
-
-	if (sTextSearch == "")
-		m_pLabelResult->setText("No filters... Records found: " + QString::number(nFound));
-	else {
-		m_pLabelResult->setText("Filter '" + sTextSearch.toHtmlEscaped() + "', Records found:  " + QString::number(nFound));
+	if (sTextSearch == "") {
+		m_pLabelResult->setText("No filters...");
+		m_pFilesModel2->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files");
+	} else {
+		m_pLabelResult->setText("Filter '" + sTextSearch.toHtmlEscaped());
+		m_pFilesModel2->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files " 
+			" WHERE path LIKE '%" + sTextSearch + "%' OR comment LIKE '%" + sTextSearch + "%' OR ext = '" + sTextSearch + "'");
 	}
-
-	QMessageBox msgBox;
-	msgBox.setText("Todo");
-	msgBox.exec();
 }
 
 // ---------------------------------------------------------------------

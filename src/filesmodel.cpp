@@ -3,6 +3,7 @@
 #include <QMouseEvent>
 #include <QApplication>
 #include <QSqlQuery>
+#include <iostream>
 
 FilesModel::FilesModel(QSqlDatabase *pDB) : QAbstractTableModel(0) {
 	m_pDB = pDB;
@@ -12,6 +13,7 @@ FilesModel::FilesModel(QSqlDatabase *pDB) : QAbstractTableModel(0) {
 
 int FilesModel::rowCount(const QModelIndex & /*parent*/) const {
     int nResult = foundRecords();
+    std::cout << nResult;
 	return nResult > 50 ? 50 : nResult;
 }
 
@@ -32,13 +34,14 @@ QVariant FilesModel::data(const QModelIndex &index, int role) const {
 		QStringList listComment;
 		QStringList listPath;
 		QStringList listMD5;
+		QStringList listLastscanning;
 
 		QSqlQuery query(*m_pDB);
 		
 		if (m_sSearchText == "") {
 			query.prepare("SELECT * FROM files LIMIT 50");
 		} else {
-			query.prepare("SELECT * as cnt FROM files WHERE path LIKE :path OR ext = :ext OR comment = :comment LIMIT 50");
+			query.prepare("SELECT * FROM files WHERE path LIKE :path OR ext = :ext OR comment = :comment LIMIT 50");
 			query.bindValue(":path", "%" + m_sSearchText + "%");
 			query.bindValue(":ext", m_sSearchText);
 			query.bindValue(":comment", m_sSearchText);
@@ -52,6 +55,7 @@ QVariant FilesModel::data(const QModelIndex &index, int role) const {
 		int fieldComment = query.record().indexOf("comment");
 		int fieldPath = query.record().indexOf("path");
 		int fieldMD5 = query.record().indexOf("md5");
+		int fieldLastScanning = query.record().indexOf("lastscanning");
 		
 		while (query.next()) {
 			listName << query.value(fieldName).toString();
@@ -61,6 +65,7 @@ QVariant FilesModel::data(const QModelIndex &index, int role) const {
 			listComment << query.value(fieldComment).toString();
 			listPath << query.value(fieldPath).toString();
 			listMD5 << query.value(fieldMD5).toString();
+			listLastscanning << query.value(fieldLastScanning).toString();
 		}
 
 		if (index.row() < listName.size() && index.column() == 0) {
