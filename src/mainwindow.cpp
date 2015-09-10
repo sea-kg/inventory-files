@@ -287,66 +287,160 @@ void MainWindow::initDirectoryTabs() {
 void MainWindow::initFilesTabs() {
 	m_pFilesWidget = new QWidget();
 	QVBoxLayout *pFilesLayout = new QVBoxLayout(m_pFilesWidget);
+	int nMinimumWidth = 100;
+
+	// name like
+	{
+		QHBoxLayout *pHLayout = new QHBoxLayout();
+		QLabel *pLabel = new QLabel("Name LIKE ");
+		pLabel->setMinimumWidth(nMinimumWidth);
+		pHLayout->addWidget(pLabel);
+
+		m_pLineEditNameLike = new QLineEdit();
+		connect(m_pLineEditNameLike, SIGNAL(returnPressed()), this, SLOT(btnFilesSearch()));
+		pHLayout->addWidget(m_pLineEditNameLike);
+
+		QWidget *pWidget = new QWidget;
+		pWidget->setLayout(pHLayout);
+		pFilesLayout->addWidget(pWidget);
+	}
+	
+	// ext
+	{
+		QHBoxLayout *pHLayout = new QHBoxLayout();
+		QLabel *pLabel = new QLabel("Ext = ");
+		pLabel->setMinimumWidth(nMinimumWidth);
+		pLabel->setMaximumWidth(nMinimumWidth);
+		pHLayout->addWidget(pLabel);
+
+		m_pLineEditExt = new QLineEdit();
+		m_pLineEditExt->setMinimumWidth(100);
+		m_pLineEditExt->setMaximumWidth(100);
+		connect(m_pLineEditExt, SIGNAL(returnPressed()), this, SLOT(btnFilesSearch()));
+		pHLayout->addWidget(m_pLineEditExt);
+
+		pHLayout->addWidget(new QWidget);
+		QWidget *pWidget = new QWidget;
+		pWidget->setLayout(pHLayout);
+		pFilesLayout->addWidget(pWidget);
+	}
+
+	// type file
+	{
+		QHBoxLayout *pHLayout = new QHBoxLayout();
+		QLabel *pLabel = new QLabel("Type = ");
+		pLabel->setMinimumWidth(nMinimumWidth);
+		pLabel->setMaximumWidth(nMinimumWidth);
+		pHLayout->addWidget(pLabel);
+
+		m_pComboBox = new QComboBox();
+		m_pComboBox->addItem("*");
+		m_pComboBox->addItem("Unknown");
+		m_pComboBox->addItem("Source Code");
+		m_pComboBox->addItem("Virtual Machine");
+		m_pComboBox->addItem("Gimp");
+		m_pComboBox->addItem("Images");
+		m_pComboBox->addItem("Document");
+		m_pComboBox->addItem("Text");
+		m_pComboBox->addItem("Binary");
+		pHLayout->addWidget(m_pComboBox);
+
+		pHLayout->addWidget(new QWidget);
+		QWidget *pWidget = new QWidget;
+		pWidget->setLayout(pHLayout);
+		pFilesLayout->addWidget(pWidget);
+	}
+
+	// size
+	{
+		QHBoxLayout *pHLayout = new QHBoxLayout();
+		QLabel *pLabel = new QLabel("Size");
+		pLabel->setMinimumWidth(nMinimumWidth);
+		pLabel->setMaximumWidth(nMinimumWidth);
+		pHLayout->addWidget(pLabel);
+
+		m_pComboBoxSize = new QComboBox();
+		m_pComboBoxSize->setMinimumWidth(50);
+		m_pComboBoxSize->setMaximumWidth(50);
+		m_pComboBoxSize->addItem("");
+		m_pComboBoxSize->addItem(">");
+		m_pComboBoxSize->addItem("<");
+		m_pComboBoxSize->addItem("=");
+		pHLayout->addWidget(m_pComboBoxSize);
+
+		m_pLineEditSize = new QLineEdit();
+		m_pLineEditSize->setMinimumWidth(50);
+		m_pLineEditSize->setMaximumWidth(50);
+		connect(m_pLineEditSize, SIGNAL(returnPressed()), this, SLOT(btnFilesSearch()));
+		pHLayout->addWidget(m_pLineEditSize);
+
+		pHLayout->addWidget(new QWidget);
+		QWidget *pWidget = new QWidget;
+		pWidget->setLayout(pHLayout);
+		pFilesLayout->addWidget(pWidget);
+	}
+	
 	// path like
 	{
 		QHBoxLayout *pHLayout = new QHBoxLayout();
-		pHLayout->addWidget(new QLabel("path LIKE "));
+		QLabel *pLabel = new QLabel("Path LIKE ");
+		pLabel->setMinimumWidth(nMinimumWidth);
+		pHLayout->addWidget(pLabel);
 
-		m_pLineEditSearch = new QLineEdit();
-		connect(m_pLineEditSearch, SIGNAL(returnPressed()), this, SLOT(btnFilesSearch()));
-		pHLayout->addWidget(m_pLineEditSearch);
-
-		QPushButton *pBtnSearch = new QPushButton("Search...");
-		pBtnSearch->setMaximumWidth(100);
-		connect(pBtnSearch, SIGNAL(clicked()), this, SLOT(btnFilesSearch()));
-		pHLayout->addWidget(pBtnSearch);
+		m_pLineEditPathLike = new QLineEdit();
+		connect(m_pLineEditPathLike, SIGNAL(returnPressed()), this, SLOT(btnFilesSearch()));
+		pHLayout->addWidget(m_pLineEditPathLike);
 
 		QWidget *pWidget = new QWidget;
 		pWidget->setLayout(pHLayout);
 		pFilesLayout->addWidget(pWidget);
 	}
-	
-	// type like
+
+	// Comment
 	{
 		QHBoxLayout *pHLayout = new QHBoxLayout();
-		pHLayout->addWidget(new QLabel("Type = "));
+		QLabel *pLabel = new QLabel("Comment LIKE ");
+		pLabel->setMinimumWidth(nMinimumWidth);
+		pLabel->setMaximumWidth(nMinimumWidth);
+		pHLayout->addWidget(pLabel);
 
-		/*m_pLineEditSearch = new QLineEdit();
-		connect(m_pLineEditSearch, SIGNAL(returnPressed()), this, SLOT(btnFilesSearch()));
-		pHLayout->addWidget(m_pLineEditSearch);
+		m_pLineEditComment = new QLineEdit();
+		connect(m_pLineEditComment, SIGNAL(returnPressed()), this, SLOT(btnFilesSearch()));
+		pHLayout->addWidget(m_pLineEditComment);
 
-		QPushButton *pBtnSearch = new QPushButton("Search...");
-		pBtnSearch->setMaximumWidth(100);
-		connect(pBtnSearch, SIGNAL(clicked()), this, SLOT(btnFilesSearch()));
-		pHLayout->addWidget(pBtnSearch);
-		*/
-
+		pHLayout->addWidget(new QWidget);
 		QWidget *pWidget = new QWidget;
 		pWidget->setLayout(pHLayout);
 		pFilesLayout->addWidget(pWidget);
 	}
-	
-	
+
+	// search button
 	{
-		m_pLabelResult = new QLabel();
-		m_pLabelResult->setText("No filters...");
-		pFilesLayout->addWidget(m_pLabelResult);
+		QHBoxLayout *pHLayout = new QHBoxLayout();
+		QPushButton *pBtnSearch = new QPushButton("Search...");
+		pBtnSearch->setMaximumWidth(100);
+		connect(pBtnSearch, SIGNAL(clicked()), this, SLOT(btnFilesSearch()));
+		pHLayout->addWidget(pBtnSearch);
+
+		pHLayout->addWidget(new QWidget);
+		QWidget *pWidget = new QWidget;
+		pWidget->setLayout(pHLayout);
+		pFilesLayout->addWidget(pWidget);
 	}
 
 	m_pTableView_Files = new QTableView();
-	// m_pFilesModel = new FilesModel(m_pDB);
-	m_pFilesModel2 = new QSqlQueryModel;
-    m_pFilesModel2->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files");
-    m_pFilesModel2->setHeaderData(0, Qt::Horizontal, tr("Name"));
-    m_pFilesModel2->setHeaderData(1, Qt::Horizontal, tr("Ext"));
-    m_pFilesModel2->setHeaderData(2, Qt::Horizontal, tr("Type"));
-    m_pFilesModel2->setHeaderData(3, Qt::Horizontal, tr("Size"));
-    m_pFilesModel2->setHeaderData(4, Qt::Horizontal, tr("Path"));
-    m_pFilesModel2->setHeaderData(5, Qt::Horizontal, tr("Comment"));
-	m_pFilesModel2->setHeaderData(6, Qt::Horizontal, tr("md5sum"));
-	m_pFilesModel2->setHeaderData(7, Qt::Horizontal, tr("Last Scanning"));
+	m_pFilesModel = new QSqlQueryModel;
+    m_pFilesModel->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files");
+    m_pFilesModel->setHeaderData(0, Qt::Horizontal, tr("Name"));
+    m_pFilesModel->setHeaderData(1, Qt::Horizontal, tr("Ext"));
+    m_pFilesModel->setHeaderData(2, Qt::Horizontal, tr("Type"));
+    m_pFilesModel->setHeaderData(3, Qt::Horizontal, tr("Size (In Bytes)"));
+    m_pFilesModel->setHeaderData(4, Qt::Horizontal, tr("Path"));
+    m_pFilesModel->setHeaderData(5, Qt::Horizontal, tr("Comment"));
+	m_pFilesModel->setHeaderData(6, Qt::Horizontal, tr("md5sum"));
+	m_pFilesModel->setHeaderData(7, Qt::Horizontal, tr("Last Scanning"));
     
-	m_pTableView_Files->setModel( m_pFilesModel2 );
+	m_pTableView_Files->setModel( m_pFilesModel );
 	pFilesLayout->addWidget(m_pTableView_Files);
 	m_pFilesWidget->setLayout(pFilesLayout);
 }
@@ -354,18 +448,44 @@ void MainWindow::initFilesTabs() {
 // ---------------------------------------------------------------------
 
 void MainWindow::btnFilesSearch() {
-	QString sTextSearch = m_pLineEditSearch->displayText();
-	// m_pFilesModel->setSearchText(sTextSearch);
-	// int nFound = m_pFilesModel->foundRecords();
 
-	if (sTextSearch == "") {
-		m_pLabelResult->setText("No filters...");
-		m_pFilesModel2->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files");
-	} else {
-		m_pLabelResult->setText("Filter '" + sTextSearch.toHtmlEscaped());
-		m_pFilesModel2->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files " 
-			" WHERE path LIKE '%" + sTextSearch + "%' OR comment LIKE '%" + sTextSearch + "%' OR ext = '" + sTextSearch + "'");
+	QStringList listQuery; 
+	if (m_pLineEditNameLike->displayText() != "") {
+		listQuery << "name LIKE '%" + m_pLineEditNameLike->displayText() + "%'";
 	}
+
+	if (m_pLineEditPathLike->displayText() != "") {
+		listQuery << "path LIKE '%" + m_pLineEditPathLike->displayText() + "%'";
+	}
+
+	QString sType = m_pComboBox->itemText(m_pComboBox->currentIndex());
+	if ( sType != "*") {
+		listQuery << "type = '" + sType + "'";
+	}
+	
+	int nSize = m_pLineEditSize->displayText().toInt();
+	QString sSize = m_pComboBoxSize->itemText(m_pComboBoxSize->currentIndex());
+	if (sSize != "") {
+		listQuery << "size " + sSize + " " + QString::number(nSize);
+	}
+	
+	QString sComment = m_pLineEditComment->displayText();
+	if (sComment != "") {
+		listQuery << "comment LIKE '%" + sComment + "%'";
+	}
+
+	QString sExt = m_pLineEditExt->displayText();
+	if (sExt != "") {
+		listQuery << "ext = '" + sExt.toUpper() + "'";
+	}
+
+	QString where = "";
+	if (listQuery.size() > 0) {
+		where = where + " WHERE " + listQuery.join(" OR ");
+	}
+	// std::cout << where.toStdString() << "\n";
+	
+	m_pFilesModel->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files " + where);
 }
 
 // ---------------------------------------------------------------------

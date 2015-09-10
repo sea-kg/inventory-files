@@ -16,11 +16,12 @@ class Job : public QThread
 		QString m_sStartDir;
 		QStack<QString> m_stackDirs;
 		int m_nCountFiles;
+		QString m_sState;
 	public:
 		Job(QSqlDatabase *pDB, QString sStartDir);
 		
 		int countFiles() const;
-
+		QString state() const;
 	protected:
 		void run();
     

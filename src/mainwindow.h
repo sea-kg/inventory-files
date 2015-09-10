@@ -15,6 +15,7 @@
 #include <QTextEdit>
 #include <QLineEdit>
 #include <QLabel>
+#include <QComboBox>
 
 #include "directorymodel.h"
 #include "filesmodel.h"
@@ -38,10 +39,16 @@ class MainWindow : public QMainWindow
 
 		QWidget *m_pFilesWidget;
 		QTableView *m_pTableView_Files;
-		QLineEdit *m_pLineEditSearch;
-		FilesModel *m_pFilesModel;
-		QSqlQueryModel *m_pFilesModel2;
-		QLabel *m_pLabelResult;
+		QSqlQueryModel *m_pFilesModel;
+
+		// filters
+		QLineEdit *m_pLineEditNameLike;
+		QLineEdit *m_pLineEditPathLike;
+		QComboBox *m_pComboBox;
+		QComboBox *m_pComboBoxSize;
+		QLineEdit *m_pLineEditSize;
+		QLineEdit *m_pLineEditComment;
+		QLineEdit *m_pLineEditExt;
 		
 		QWidget *m_pJobsWidget;
 
