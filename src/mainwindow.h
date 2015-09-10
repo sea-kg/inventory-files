@@ -18,7 +18,7 @@
 #include <QComboBox>
 
 #include "directorymodel.h"
-#include "filesmodel.h"
+#include "jobsmodel.h"
 #include "job.h"
 
 class MainWindow : public QMainWindow
@@ -51,10 +51,10 @@ class MainWindow : public QMainWindow
 		QLineEdit *m_pLineEditExt;
 		
 		QWidget *m_pJobsWidget;
+		QTableView *m_pTableView_Jobs;
+		JobsModel *m_pJobsModel;
 
 		QString m_sWorkDirectory;
-
-		QMap<QString, Job*> m_mapJobs;
 		
 	private:
 		void initConnection();

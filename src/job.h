@@ -22,6 +22,7 @@ class Job : public QThread
 		
 		int countFiles() const;
 		QString state() const;
+		
 	protected:
 		void run();
     

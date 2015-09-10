@@ -8,6 +8,7 @@
 #include <QApplication>
 #include <QDir>
 #include <QFileDialog>
+#include "detecttype.h"
 
 MainWindow::MainWindow(QString sWorkDirectory)
 {
@@ -132,9 +133,8 @@ void MainWindow::btnRemoveDirectory() {
 
     for (int i = 0; i < listRemove.size(); i++) {
 		QString sPath = listRemove.at(i);
-		
-		terminateJob(sPath);
-	
+
+		m_pJobsModel->terminateJob(sPath);
 		// delete from dirs
 		{
 			QSqlQuery query(*m_pDB);
@@ -151,27 +151,6 @@ void MainWindow::btnRemoveDirectory() {
 			query.exec();
 		}
 		m_pDirectoryModel->needReset();
-	}
-}
-
-// ---------------------------------------------------------------------
-
-void MainWindow::terminateJob(QString sPath) {
-	if (m_mapJobs.contains(sPath)) {
-		if (m_mapJobs[sPath]->isFinished()) {
-			std::cout << " job finished\n";
-			m_mapJobs.remove(sPath);
-			std::cout << "removed job.\n";
-		} else {
-			std::cout << "stopping job...\n";
-			Job *pJob = m_mapJobs[sPath];
-			pJob->terminate();
-			while (!pJob->isFinished()) {
-				std::cout << "stopping job...\n";
-			}
-			m_mapJobs.remove(sPath);
-			std::cout << "removed job.\n";
-		}
 	}
 }
 
@@ -197,15 +176,8 @@ void MainWindow::btnScanDirectory() {
 		query.bindValue(":path", sPath);
 		query.exec();
 		
-		terminateJob(sPath);
-			
-		Job *pJob = new Job(m_pDB, sPath);
-		if (!m_mapJobs.contains(sPath)) {
-			m_mapJobs[sPath] = pJob;
-			pJob->start();
-		} else {
-			std::cout << " job already exists\n";
-		}
+		m_pJobsModel->terminateJob(sPath);
+		m_pJobsModel->runJob(sPath);
 		m_pDirectoryModel->needReset();
 	}
 }
@@ -335,14 +307,13 @@ void MainWindow::initFilesTabs() {
 
 		m_pComboBox = new QComboBox();
 		m_pComboBox->addItem("*");
-		m_pComboBox->addItem("Unknown");
-		m_pComboBox->addItem("Source Code");
-		m_pComboBox->addItem("Virtual Machine");
-		m_pComboBox->addItem("Gimp");
-		m_pComboBox->addItem("Images");
-		m_pComboBox->addItem("Document");
-		m_pComboBox->addItem("Text");
-		m_pComboBox->addItem("Binary");
+		
+		{
+			QStringList ft = fileTypes();
+			for (int i = 0; i < ft.size(); i++) {
+				m_pComboBox->addItem(ft.at(i));
+			}
+		}
 		pHLayout->addWidget(m_pComboBox);
 
 		pHLayout->addWidget(new QWidget);
@@ -430,16 +401,17 @@ void MainWindow::initFilesTabs() {
 
 	m_pTableView_Files = new QTableView();
 	m_pFilesModel = new QSqlQueryModel;
-    m_pFilesModel->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files");
+    // m_pFilesModel->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files");
+    m_pFilesModel->setQuery("SELECT name, ext, type, size, path, lastscanning  FROM files");
     m_pFilesModel->setHeaderData(0, Qt::Horizontal, tr("Name"));
     m_pFilesModel->setHeaderData(1, Qt::Horizontal, tr("Ext"));
     m_pFilesModel->setHeaderData(2, Qt::Horizontal, tr("Type"));
     m_pFilesModel->setHeaderData(3, Qt::Horizontal, tr("Size (In Bytes)"));
     m_pFilesModel->setHeaderData(4, Qt::Horizontal, tr("Path"));
-    m_pFilesModel->setHeaderData(5, Qt::Horizontal, tr("Comment"));
-	m_pFilesModel->setHeaderData(6, Qt::Horizontal, tr("md5sum"));
+    // m_pFilesModel->setHeaderData(5, Qt::Horizontal, tr("Comment"));
+	// m_pFilesModel->setHeaderData(6, Qt::Horizontal, tr("md5sum"));
 	m_pFilesModel->setHeaderData(7, Qt::Horizontal, tr("Last Scanning"));
-    
+
 	m_pTableView_Files->setModel( m_pFilesModel );
 	pFilesLayout->addWidget(m_pTableView_Files);
 	m_pFilesWidget->setLayout(pFilesLayout);
@@ -484,12 +456,25 @@ void MainWindow::btnFilesSearch() {
 		where = where + " WHERE " + listQuery.join(" OR ");
 	}
 	// std::cout << where.toStdString() << "\n";
-	
-	m_pFilesModel->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files " + where);
+
+	// m_pFilesModel->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files " + where);
+	m_pFilesModel->setQuery("SELECT name, ext, type, size, path, lastscanning  FROM files " + where);
 }
 
 // ---------------------------------------------------------------------
 
 void MainWindow::initJobsTabs() {
 	m_pJobsWidget = new QWidget();
+	QVBoxLayout *pJobsLayout = new QVBoxLayout();
+	
+	m_pTableView_Jobs = new QTableView(m_pJobsWidget);
+	m_pJobsModel = new JobsModel(m_pDB);
+
+	m_pTableView_Jobs->setModel( m_pJobsModel );
+	m_pTableView_Jobs->setColumnWidth(0, 400);
+	m_pTableView_Jobs->setColumnWidth(1, 160);
+	m_pTableView_Jobs->setColumnWidth(2, 160);
+	
+	pJobsLayout->addWidget(m_pTableView_Jobs);
+	m_pJobsWidget->setLayout(pJobsLayout);
 }

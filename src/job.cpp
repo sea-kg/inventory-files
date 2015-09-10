@@ -1,4 +1,5 @@
 #include "job.h"
+#include "detecttype.h"
 #include <QWheelEvent>
 #include <QMouseEvent>
 #include <QApplication>
@@ -19,12 +20,30 @@ void Job::run() {
 	m_stackDirs.push(m_sStartDir);
 	
 	m_sState = "Checking...";
-	// todo check existing files
+	m_nCountFiles = 0;
+	{
+		QSqlQuery query(*m_pDB);
+		query.prepare("SELECT path FROM files WHERE path LIKE :path");
+		query.bindValue(":path", m_sStartDir + "%");
+		query.exec();
+		while (query.next()) {
+			QString sFilePath = query.value(0).toString();
+			m_nCountFiles++;
+			if (!QFile::exists(sFilePath)) {
+				std::cout << "file not exists: " << sFilePath.toStdString() << "\n";
+				QSqlQuery query_remove(*m_pDB);
+				query_remove.prepare("DELETE FROM files WHERE path = :path");
+				query_remove.bindValue(":path", sFilePath);
+				query_remove.exec();
+			}
+		}
+	}
 
 	m_sState = "Scanning...";
+	m_nCountFiles = 0;
 	while(m_stackDirs.size() > 0) {
 		QDir dir(m_stackDirs.pop());
-		// std::cout << "Scan in " << dir.canonicalPath().toStdString() << "\n";
+		std::cout << "Scan in " << dir.canonicalPath().toStdString() << "\n";
 		QFileInfoList files = dir.entryInfoList(QDir::AllDirs | QDir::Hidden | QDir::Files | QDir::NoSymLinks);
 		foreach (QFileInfo file, files) {
 			if (file.isDir()) {
@@ -50,6 +69,8 @@ void Job::run() {
 					}
 				}
 				
+				QString sType = detectType(file);
+				
 				if (!bContains) {
 					QSqlQuery query(*m_pDB);
 					query.prepare("INSERT INTO files(path,name,md5,comment,ext,type,size,lastscanning) "
@@ -59,25 +80,25 @@ void Job::run() {
 					query.bindValue(":md5", "TODO");
 					query.bindValue(":comment", "");
 					query.bindValue(":ext", file.suffix().toUpper());
-					query.bindValue(":type", "Unknown");
+					query.bindValue(":type", sType);
 					query.bindValue(":size", file.size());
 					query.exec();
 				} else {
 					// todo optimize update 
 					QSqlQuery query(*m_pDB);
 					query.prepare("UPDATE files SET "
-						" md5 = :md5, "
+						// " md5 = :md5, "
 						" type = :type, "
 						" size = :size, "
 						" lastscanning = CURRENT_TIMESTAMP"
-						" WHERE path = :path"
-						"VALUES(:path,:name,:md5,:comment,:ext,:type,:size,CURRENT_TIMESTAMP)");
-					query.bindValue(":md5", "TODO");
-					query.bindValue(":type", "Unknown");
+						" WHERE path = :path");
+					// query.bindValue(":md5", "TODO");
+					query.bindValue(":type", sType);
 					query.bindValue(":size", file.size());
+					query.bindValue(":path", sFilePath);
 					query.exec();
 				}
-				// std::cout << "FILE: " << sFilePath.toStdString() << "\n";
+				std::cout << "FILE: " << sFilePath.toStdString() << "\n";
 			}
 		}
 	}
@@ -89,3 +110,11 @@ void Job::run() {
 int Job::countFiles() const {
 	return m_nCountFiles;
 }
+
+// ---------------------------------------------------------------------
+
+QString Job::state() const {
+	return m_sState;
+}
+
+// ---------------------------------------------------------------------
