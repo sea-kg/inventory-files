@@ -1,5 +1,5 @@
-#ifndef DIRECTORY_MODEL_H
-#define DIRECTORY_MODEL_H
+#ifndef FILES_MODEL_H
+#define FILES_MODEL_H
 
 #include <QWidget>
 #include <QTableView>
@@ -7,23 +7,25 @@
 #include <QtSql>
 #include <QStringList>
 
-class DirectoryModel : public QAbstractTableModel
+class FilesModel : public QAbstractTableModel
 {
 		Q_OBJECT
 	private:
 		QSqlDatabase *m_pDB;
-		
-
+		QString m_sSearchText;
 	public:
-		DirectoryModel(QSqlDatabase *pDB);
+		FilesModel(QSqlDatabase *pDB);
 		int rowCount(const QModelIndex &parent = QModelIndex()) const ;
 		int columnCount(const QModelIndex &parent = QModelIndex()) const;
 		QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 		QVariant headerData(int section, Qt::Orientation  orientation, int role) const;
 		void needReset();
+		void setSearchText(QString sSearchText);
+		int foundRecords() const;
 	signals:
 
 	public slots:
+
 };
 
-#endif // DIRECTORY_MODEL_H
+#endif // FILES_MODEL_H
