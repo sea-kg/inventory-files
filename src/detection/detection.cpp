@@ -5,12 +5,14 @@
 #include "src/detection/cache.h"
 #include "src/detection/config.h"
 #include "src/detection/css.h"
+#include "src/detection/dia.h"
 #include "src/detection/document.h"
 #include "src/detection/gimp.h"
 #include "src/detection/image.h"
 #include "src/detection/javascript.h"
 #include "src/detection/library.h"
 #include "src/detection/logfile.h"
+#include "src/detection/php.h"
 #include "src/detection/presentation.h"
 #include "src/detection/python.h"
 #include "src/detection/sound.h"
@@ -29,12 +31,14 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionCache()));
 	m_pDetections.push_back((IDetection *)(new DetectionConfig()));
 	m_pDetections.push_back((IDetection *)(new DetectionCSS()));
+	m_pDetections.push_back((IDetection *)(new DetectionDia()));
 	m_pDetections.push_back((IDetection *)(new DetectionDocument()));
 	m_pDetections.push_back((IDetection *)(new DetectionGimp()));
 	m_pDetections.push_back((IDetection *)(new DetectionImage()));
 	m_pDetections.push_back((IDetection *)(new DetectionJavaScript()));
 	m_pDetections.push_back((IDetection *)(new DetectionLibrary()));
 	m_pDetections.push_back((IDetection *)(new DetectionLogFile()));
+	m_pDetections.push_back((IDetection *)(new DetectionPHP()));
 	m_pDetections.push_back((IDetection *)(new DetectionPresentation()));
 	m_pDetections.push_back((IDetection *)(new DetectionPython()));
 	m_pDetections.push_back((IDetection *)(new DetectionSound()));

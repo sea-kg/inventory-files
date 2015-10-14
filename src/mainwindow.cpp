@@ -455,12 +455,12 @@ void MainWindow::btnFilesSearch() {
 
 	QString where = "";
 	if (listQuery.size() > 0) {
-		where = where + " WHERE " + listQuery.join(" OR ");
+		where = where + " WHERE " + listQuery.join(" AND ");
 	}
 	// std::cout << where.toStdString() << "\n";
 
 	// m_pFilesModel->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files " + where);
-	m_pFilesModel->setQuery("SELECT name, ext, type, size, path, lastscanning  FROM files " + where);
+	m_pFilesModel->setQuery("SELECT name, ext, type, size, upper(path) as path, lastscanning  FROM files " + where);
 }
 
 // ---------------------------------------------------------------------

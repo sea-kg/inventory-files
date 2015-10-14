@@ -1,19 +1,19 @@
-#include "image.h"
+#include "dia.h"
 
-void DetectionImage::types(QStringList &list) {
-	list << "Image";
+void DetectionDia::types(QStringList &list) {
+	list << "Dia";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionImage::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionDia::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "PNG" || sSuffix == "JPG" || sSuffix == "JPEG" || sSuffix == "GIF" || sSuffix == "SVG" || sSuffix == "ICO");
+	bool bType = (sSuffix == "DIA");
 	if (bType) {
-		type = "Image";
+		type = "Dia";
 		subtype = "todo"; // version and another information
 	}
 	return bType;

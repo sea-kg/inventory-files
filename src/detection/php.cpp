@@ -1,19 +1,19 @@
-#include "image.h"
+#include "php.h"
 
-void DetectionImage::types(QStringList &list) {
-	list << "Image";
+void DetectionPHP::types(QStringList &list) {
+	list << "PHP";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionImage::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionPHP::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "PNG" || sSuffix == "JPG" || sSuffix == "JPEG" || sSuffix == "GIF" || sSuffix == "SVG" || sSuffix == "ICO");
+	bool bType = (sSuffix == "PHP");
 	if (bType) {
-		type = "Image";
+		type = "PHP";
 		subtype = "todo"; // version and another information
 	}
 	return bType;

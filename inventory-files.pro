@@ -18,12 +18,14 @@ SOURCES += \
 	src/detection/cache.cpp \
 	src/detection/config.cpp \
 	src/detection/css.cpp \
+	src/detection/dia.cpp \
 	src/detection/document.cpp \
 	src/detection/gimp.cpp \
 	src/detection/image.cpp \
 	src/detection/javascript.cpp \
 	src/detection/library.cpp \
 	src/detection/logfile.cpp \
+	src/detection/php.cpp \
 	src/detection/presentation.cpp \
 	src/detection/python.cpp \
 	src/detection/sound.cpp \
@@ -47,12 +49,14 @@ HEADERS += \
 	src/detection/cache.h \
 	src/detection/config.h \
 	src/detection/css.h \
+	src/detection/dia.h \
 	src/detection/document.h \
 	src/detection/gimp.h \
 	src/detection/image.h \
 	src/detection/javascript.h \
 	src/detection/library.h \
 	src/detection/logfile.h \
+	src/detection/php.h \
 	src/detection/presentation.h \
 	src/detection/python.h \
 	src/detection/sound.h \
