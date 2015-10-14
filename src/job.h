@@ -7,12 +7,14 @@
 #include <QtSql>
 #include <QStringList>
 #include <QThread>
+#include "detection/detection.h"
 
 class Job : public QThread
 {
 		Q_OBJECT
 	private:
 		QSqlDatabase *m_pDB;
+		Detection *m_pDetection;
 		QString m_sStartDir;
 		QStack<QString> m_stackDirs;
 		int m_nCountFiles;

@@ -1,5 +1,4 @@
 #include "job.h"
-#include "detecttype.h"
 #include <QWheelEvent>
 #include <QMouseEvent>
 #include <QApplication>
@@ -11,6 +10,7 @@ Job::Job(QSqlDatabase *pDB, QString sStartDir) {
 	m_sStartDir = sStartDir;
 	m_nCountFiles = 0;
 	m_sState = "begin";
+	m_pDetection = new Detection();
 }
 
 // ---------------------------------------------------------------------
@@ -69,7 +69,12 @@ void Job::run() {
 					}
 				}
 				
-				QString sType = detectType(file);
+				QString sType;
+				QString sSubType;
+				if (!m_pDetection->isType(file, sType, sSubType)) {
+					std::cerr << "Warning: Could not detect type for file: " << sFilePath.toStdString() << "\n";
+					sType = "Unknown";
+				}
 				
 				if (!bContains) {
 					QSqlQuery query(*m_pDB);

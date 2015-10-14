@@ -8,7 +8,7 @@
 #include <QApplication>
 #include <QDir>
 #include <QFileDialog>
-#include "detecttype.h"
+#include "detection/detection.h"
 
 MainWindow::MainWindow(QString sWorkDirectory)
 {
@@ -309,7 +309,9 @@ void MainWindow::initFilesTabs() {
 		m_pComboBox->addItem("*");
 		
 		{
-			QStringList ft = fileTypes();
+			Detection *pDetection = new Detection();
+			QStringList ft;
+			pDetection->types(ft);
 			for (int i = 0; i < ft.size(); i++) {
 				m_pComboBox->addItem(ft.at(i));
 			}
