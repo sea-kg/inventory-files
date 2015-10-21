@@ -14,6 +14,6 @@ Qt >5
 
 # run
 
-	`$ ./inventory-files`
+	`$ ./inventory-files.bin`
 
 	
