@@ -10,6 +10,7 @@
 #include "src/detection/gimp.h"
 #include "src/detection/image.h"
 #include "src/detection/javascript.h"
+#include "src/detection/json.h"
 #include "src/detection/library.h"
 #include "src/detection/logfile.h"
 #include "src/detection/php.h"
@@ -36,6 +37,7 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionGimp()));
 	m_pDetections.push_back((IDetection *)(new DetectionImage()));
 	m_pDetections.push_back((IDetection *)(new DetectionJavaScript()));
+	m_pDetections.push_back((IDetection *)(new DetectionJson()));
 	m_pDetections.push_back((IDetection *)(new DetectionLibrary()));
 	m_pDetections.push_back((IDetection *)(new DetectionLogFile()));
 	m_pDetections.push_back((IDetection *)(new DetectionPHP()));

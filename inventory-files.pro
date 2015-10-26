@@ -23,6 +23,7 @@ SOURCES += \
 	src/detection/gimp.cpp \
 	src/detection/image.cpp \
 	src/detection/javascript.cpp \
+	src/detection/json.cpp \
 	src/detection/library.cpp \
 	src/detection/logfile.cpp \
 	src/detection/php.cpp \
@@ -54,6 +55,7 @@ HEADERS += \
 	src/detection/gimp.h \
 	src/detection/image.h \
 	src/detection/javascript.h \
+	src/detection/json.h \
 	src/detection/library.h \
 	src/detection/logfile.h \
 	src/detection/php.h \
