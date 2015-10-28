@@ -60,9 +60,16 @@ Detection::Detection() {
 
 void Detection::types(QStringList &list) {
 	for (int i = 0; i < m_pDetections.size(); i++) {
-		m_pDetections[i]->types(list);
+		QStringList tmpList;
+		m_pDetections[i]->types(tmpList);
+		for (int i1 = 0; i1 < tmpList.size(); i1++) {
+			if (!list.contains(tmpList[i1]))
+				list << tmpList[i1];
+		}
 	}
-	list << "Unknown";
+	QString strUnknown = "Unknown";
+	if (!list.contains(strUnknown))
+		list << strUnknown;
 };
 
 // -------------------------------------------------------------------
