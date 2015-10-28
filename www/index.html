@@ -6,34 +6,125 @@
 		<meta name="copyright" lang="ru" content="sea-kg" />
 		<meta name="description" content="inventory files" />
 		<meta name="keywords" content="inventory, files, inventorization, linux, application" />
+		<style>
+			.body {
+				padding: 0px;
+				margin: 0px;
+			}
+			.content {
+				padding: 10px;
+				margin: 10px;
+				display: inline-block;
+				position: relative;
+				left: 250px;
+			}
+			.menu {
+				position: fixed;
+				width: 200px;
+				text-align: center;
+				background-color: #EEEEEE;
+				padding: 10px;
+				margin: 10px;
+				font-size: 120%;
+				font-family: Verdana, Arial, Helvetica, sans-serif; 
+				color: #333366;
+			}
+			.menu-item {
+				background-color: #FFFFFF;
+				padding: 5px;
+				width: 190px;
+			}
+			.menu-item:hover {
+				background-color: #EEEEEE;
+				cursor: pointer;
+			}
+		</style>
 	</head>
-	<body style="padding: 0px; margin: 0px;">
-		<table width=100% height=100% cellspacing="0px" cellpadding="25px">
-			<tr>
-				<td width=33% align="right" valign="bottom"><h1>for <a href="#">Windows</a></h1></td>
-				<td bgcolor="#EEEEEE" width=33% align="center" valign="bottom"><h2>Open Source Program</h2></td>
-				<td width=33% align="left" valign="bottom"><h1>for <a href="#">Linux</a></h1></td>
-			</tr>
-			<tr>
-				<td bgcolor="#EEEEEE" width=33% height=33% align="right" valign="middle">
-						<h2>Download<br>source<br>code<br>from<br>
-						<a href="https://github.com/sea-kg/inventory-files" target="_blank">GitHub.com</a></h2>
-				</td>
-				<td width=33% height=33% align="center"><img src="logo.png"/><br>Comin soon...</td>
-				<td  bgcolor="#EEEEEE" width=33% height=33% align="left" valign="middle"><h1>Perform an inventory of the files on your computer</h1></td>
-			</tr>
-			<tr>
-				<td width=33% height=33% align="right" valign="top"><h1>C++<br>Qt5 Framework<br>SQLite<br>NopeSQL</h1></td>
-				<td bgcolor="#EEEEEE" width=33% height=33% align="center" valign="top"><h3>Just detection by filepath and file extension.
-					<br><br>Need more information?...<br>
-					Just write me to:<br>
-					mrseakg(at)gmail.com<br>
-					
-					</h3></td>
-				
-				<td width=33% height=33% align="left" valign="top"><h1>Searching...<br>And indexing in background</h1></td>
-			</tr>
-		</table>
+	<body class="body">
+		<div class="menu">
+			<div class="menu-item" onclick="location.href='http://inventory-files.sea-kg.com';"><img width="190px" src="logo.png"/></div>
+			<div class="menu-item" onclick="location.href='#about';">About</div>
+			<div class="menu-item" onclick="location.href='#license';">License</div>
+			<div class="menu-item" onclick="location.href='#sources';">Sources</div>
+			<div class="menu-item" onclick="location.href='#download';">Download</div>
+			<div class="menu-item" onclick="location.href='#contacts';">Contacts</div>
+			<div class="menu-item" onclick="location.href='#developers';">Developers</div>
+		</div>
+		<div class="content">
+			<h1><a name="about">About</a></h1>
+			<ul>
+				<li>Perform an inventory of the files on your computer</li>
+				<li>Just detection by filepath and file extension.</li>
+				<li>Open Source Program</li>
+				<li>Free Program</li>
+				<li>Search</li>
+				<li>Indexing files</li>
+				<li>May be reports</li>
+			</ul>
+			Used Technologies:
+			<ul>
+				<li>C++</li>
+				<li>Qt5 Framework</li>
+				<li>Database SQLite</li>
+				<li>NopeSQL</li>
+			</ul>
+			Screens from current version:<br><br>
+			<img width="500px" src="screen01.png"/><br><br>
+			<img width="500px" src="screen02.png"/><br><br>
+
+			<h1><a name="license">License</a></h1>
+			
+			Download program your accept next license:
+			<pre>
+The MIT License (MIT)
+
+Copyright (c) 2015 Evgenii Sopov
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+			</pre>
+
+			<h1><a name="sources">Sources</a></h1>
+			You can donwload source code from here: <a href="https://github.com/sea-kg/inventory-files" target="_blank">GitHub.com</a><br/><br/>
+			
+			Or Build & Run (for Ubuntu or Debian):
+			<pre>
+$ sudo apt-get install git-core
+$ sudo apt-get install qt-sdk
+$ cd ~
+$ git clone https://github.com/sea-kg/inventory-files.git inventory-files
+$ cd inventory-files
+$ qmake
+$ make
+$ ./inventory-files.bin
+			</pre>
+			<h1><a name="download">Download</a></h1>
+			Comin soon... for Linux and for Windows
+			
+			<h1><a name="contacts">Contacs</a></h1>
+			Need more information?... Or have you proposal?<br>
+			Please write e-mail to me: mrseakg(at)gmail.com
+			
+			<h1><a name="developers">Developers</a></h1>
+			<ul>
+				<li>Evgenii Sopov</li>
+			</ul>
+		</div>
 	</body>
 </html>
 		
