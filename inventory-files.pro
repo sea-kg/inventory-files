@@ -20,6 +20,7 @@ SOURCES += \
 	src/detection/css.cpp \
 	src/detection/dia.cpp \
 	src/detection/document.cpp \
+	src/detection/font.cpp \
 	src/detection/gimp.cpp \
 	src/detection/image.cpp \
 	src/detection/javascript.cpp \
@@ -52,6 +53,7 @@ HEADERS += \
 	src/detection/css.h \
 	src/detection/dia.h \
 	src/detection/document.h \
+	src/detection/font.h \
 	src/detection/gimp.h \
 	src/detection/image.h \
 	src/detection/javascript.h \

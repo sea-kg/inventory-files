@@ -7,6 +7,7 @@
 #include "src/detection/css.h"
 #include "src/detection/dia.h"
 #include "src/detection/document.h"
+#include "src/detection/font.h"
 #include "src/detection/gimp.h"
 #include "src/detection/image.h"
 #include "src/detection/javascript.h"
@@ -34,6 +35,7 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionCSS()));
 	m_pDetections.push_back((IDetection *)(new DetectionDia()));
 	m_pDetections.push_back((IDetection *)(new DetectionDocument()));
+	m_pDetections.push_back((IDetection *)(new DetectionFont()));
 	m_pDetections.push_back((IDetection *)(new DetectionGimp()));
 	m_pDetections.push_back((IDetection *)(new DetectionImage()));
 	m_pDetections.push_back((IDetection *)(new DetectionJavaScript()));
