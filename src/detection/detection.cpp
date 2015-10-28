@@ -14,6 +14,7 @@
 #include "src/detection/json.h"
 #include "src/detection/library.h"
 #include "src/detection/logfile.h"
+#include "src/detection/mercurial.h"
 #include "src/detection/php.h"
 #include "src/detection/presentation.h"
 #include "src/detection/python.h"
@@ -42,6 +43,7 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionJson()));
 	m_pDetections.push_back((IDetection *)(new DetectionLibrary()));
 	m_pDetections.push_back((IDetection *)(new DetectionLogFile()));
+	m_pDetections.push_back((IDetection *)(new DetectionMercurial()));
 	m_pDetections.push_back((IDetection *)(new DetectionPHP()));
 	m_pDetections.push_back((IDetection *)(new DetectionPresentation()));
 	m_pDetections.push_back((IDetection *)(new DetectionPython()));

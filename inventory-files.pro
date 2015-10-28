@@ -27,6 +27,7 @@ SOURCES += \
 	src/detection/json.cpp \
 	src/detection/library.cpp \
 	src/detection/logfile.cpp \
+	src/detection/mercurial.cpp \
 	src/detection/php.cpp \
 	src/detection/presentation.cpp \
 	src/detection/python.cpp \
@@ -60,6 +61,7 @@ HEADERS += \
 	src/detection/json.h \
 	src/detection/library.h \
 	src/detection/logfile.h \
+	src/detection/mercurial.h \
 	src/detection/php.h \
 	src/detection/presentation.h \
 	src/detection/python.h \
