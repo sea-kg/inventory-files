@@ -25,6 +25,7 @@
 #include "src/detection/virtual_machine.h"
 #include "src/detection/webpage.h"
 #include "src/detection/xml.h"
+
 #include <iostream>
 
 Detection::Detection() {

@@ -3,10 +3,15 @@ QT += gui
 QT += widgets
 QT += sql
 
+INCLUDEPATH += 3rdparty/clucene/src/core/
+INCLUDEPATH += 3rdparty/clucene/src/core/CLucene/
+
 TARGET = inventory-files.bin
 CONFIG += console release
 TEMPLATE = app
 SOURCES += \
+	src/qsimplenopesql/qsimplenopesql.cpp \
+	src/qsimplenopesql/qsimplenopesql_doc.cpp \
 	src/directorymodel.cpp \
 	src/jobsmodel.cpp \
 	src/job.cpp \
@@ -41,6 +46,8 @@ SOURCES += \
 	src/detection/detection.cpp	\
 
 HEADERS += \
+	src/qsimplenopesql/qsimplenopesql.h \
+	src/qsimplenopesql/qsimplenopesql_doc.h \
 	src/directorymodel.h \
 	src/jobsmodel.h \
 	src/job.h \
