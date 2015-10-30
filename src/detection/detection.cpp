@@ -18,6 +18,7 @@
 #include "src/detection/mercurial.h"
 #include "src/detection/php.h"
 #include "src/detection/presentation.h"
+#include "src/detection/project.h"
 #include "src/detection/python.h"
 #include "src/detection/sound.h"
 #include "src/detection/sourcecodecpp.h"
@@ -49,6 +50,7 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionMercurial()));
 	m_pDetections.push_back((IDetection *)(new DetectionPHP()));
 	m_pDetections.push_back((IDetection *)(new DetectionPresentation()));
+	m_pDetections.push_back((IDetection *)(new DetectionProject()));
 	m_pDetections.push_back((IDetection *)(new DetectionPython()));
 	m_pDetections.push_back((IDetection *)(new DetectionSound()));
 	m_pDetections.push_back((IDetection *)(new DetectionSourceCodeCpp()));

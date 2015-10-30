@@ -36,6 +36,7 @@ SOURCES += \
 	src/detection/mercurial.cpp \
 	src/detection/php.cpp \
 	src/detection/presentation.cpp \
+	src/detection/project.cpp \
 	src/detection/python.cpp \
 	src/detection/sound.cpp \
 	src/detection/sourcecodecpp.cpp \
@@ -73,6 +74,7 @@ HEADERS += \
 	src/detection/mercurial.h \
 	src/detection/php.h \
 	src/detection/presentation.h \
+	src/detection/project.h \
 	src/detection/python.h \
 	src/detection/sound.h \
 	src/detection/sourcecodecpp.h \
