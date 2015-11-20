@@ -10,6 +10,7 @@
 #include <QIcon>
 #include <QFileDialog>
 #include "detection/detection.h"
+#include "scandialog.h"
 
 MainWindow::MainWindow(QString sWorkDirectory)
 {
@@ -182,6 +183,7 @@ void MainWindow::btnRemoveDirectory() {
 // ---------------------------------------------------------------------
 
 void MainWindow::btnScanDirectory() {
+	
 	// Get all selections
 	QStringList listRemove;
     QModelIndexList indexes = m_pTableView_Directories->selectionModel()->selection().indexes();
@@ -191,19 +193,28 @@ void MainWindow::btnScanDirectory() {
     	if (!listRemove.contains(index.data().toString()))
 			listRemove << index.data().toString();
     }
-    
-    for (int i = 0; i < listRemove.size(); i++) {
-		QString sPath = listRemove.at(i);
+	QString strPaths = listRemove.join("\n");
+	ScanDialog sd(this, strPaths);
+	sd.setModal(true);
+    if (sd.exec() == QDialog::Accepted){
+		QStringList strListFilter = sd.filter();
 		
-		// start scan
-		QSqlQuery query(*m_pDB);
-		query.prepare("UPDATE directories SET lastscanning = CURRENT_TIMESTAMP WHERE path = :path");
-		query.bindValue(":path", sPath);
-		query.exec();
+		std::cout << "Filter not work now: " << strListFilter.join(", ").toStdString() << "\n";
 		
-		m_pJobsModel->terminateJob(sPath);
-		m_pJobsModel->runJob(sPath);
-		m_pDirectoryModel->needReset();
+		// return;
+		for (int i = 0; i < listRemove.size(); i++) {
+			QString sPath = listRemove.at(i);
+			
+			// start scan
+			QSqlQuery query(*m_pDB);
+			query.prepare("UPDATE directories SET lastscanning = CURRENT_TIMESTAMP WHERE path = :path");
+			query.bindValue(":path", sPath);
+			query.exec();
+
+			m_pJobsModel->terminateJob(sPath);
+			m_pJobsModel->runJob(sPath);
+			m_pDirectoryModel->needReset();
+		}
 	}
 }
 
@@ -505,3 +516,4 @@ void MainWindow::initJobsTabs() {
 	pJobsLayout->addWidget(m_pTableView_Jobs);
 	m_pJobsWidget->setLayout(pJobsLayout);
 }
+

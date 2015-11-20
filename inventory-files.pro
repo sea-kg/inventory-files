@@ -13,6 +13,7 @@ SOURCES += \
 	src/directorymodel.cpp \
 	src/jobsmodel.cpp \
 	src/job.cpp \
+	src/scandialog.cpp \
 	src/mainwindow.cpp \
 	src/main.cpp \
 	src/detection/animation.cpp	\
@@ -49,6 +50,7 @@ HEADERS += \
 	src/directorymodel.h \
 	src/jobsmodel.h \
 	src/job.h \
+	src/scandialog.h \
 	src/mainwindow.h \
 	src/detection/idetection.h \
 	src/detection/animation.h \
