@@ -30,8 +30,11 @@ class MainWindow : public QMainWindow
 		
 		QTabWidget *m_pTabWidget;
 		QVBoxLayout *m_pMainLayout;
+		QMenu *m_pMenuFile;
+		
 		QMenu *m_pMenuHelp;
 		QAction *m_pActionLicense;
+		QAction *m_pActionAuthor;
 		
 		QWidget *m_pDirectoryWidget;
 		QTableView *m_pTableView_Directories;
@@ -58,6 +61,7 @@ class MainWindow : public QMainWindow
 		
 	private:
 		void initConnection();
+		void initActions();
 		void initDirectoryTabs();
 		void initFilesTabs();
 		void initJobsTabs();
@@ -73,6 +77,7 @@ class MainWindow : public QMainWindow
 		
 	private slots:
 		void actionLicense();
+		void actionAuthor();
 		void btnInsertDirectory();
 		void btnRemoveDirectory();
 		void btnScanDirectory();
@@ -80,3 +85,4 @@ class MainWindow : public QMainWindow
 };
 
 #endif // MAIN_WIDGET_H
+

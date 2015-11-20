@@ -18,18 +18,14 @@ MainWindow::MainWindow(QString sWorkDirectory)
     setMinimumSize(1000, 600);
 	setWindowIcon(QIcon(":/www/images/inventory-files.png"));
 	initConnection();
-
-    // actions
-    {
-		m_pActionLicense = new QAction(tr("&License"), this);
-		// newAct->setShortcuts(QKeySequence::New);
-		m_pActionLicense->setStatusTip("License");
-		connect(m_pActionLicense, SIGNAL(triggered()), this, SLOT(actionLicense()));
-	}
+	initActions();
 
     // menu
     {
+		m_pMenuFile = menuBar()->addMenu("&File");
+
 		m_pMenuHelp = menuBar()->addMenu("&Help");
+		m_pMenuHelp->addAction(m_pActionAuthor);
 		m_pMenuHelp->addAction(m_pActionLicense);
 	}
     
@@ -56,8 +52,23 @@ MainWindow::MainWindow(QString sWorkDirectory)
 
 // ---------------------------------------------------------------------
 
+void MainWindow::initActions(){
+	m_pActionAuthor = new QAction(tr("&Author"), this);
+	// newAct->setShortcuts(QKeySequence::New);
+	m_pActionAuthor->setStatusTip("Author");
+	connect(m_pActionAuthor, SIGNAL(triggered()), this, SLOT(actionAuthor()));
+
+	m_pActionLicense = new QAction(tr("&License"), this);
+	// newAct->setShortcuts(QKeySequence::New);
+	m_pActionLicense->setStatusTip("License");
+	connect(m_pActionLicense, SIGNAL(triggered()), this, SLOT(actionLicense()));
+}
+
+// ---------------------------------------------------------------------
+
 void MainWindow::actionLicense() {
 	QMessageBox msgBox;
+	msgBox.setModal( true );
 	msgBox.setText(
 		"The MIT License (MIT)\n\n"
 		"Copyright (c) 2015 Evgenii Sopov\n\n"
@@ -76,6 +87,19 @@ void MainWindow::actionLicense() {
 		"LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,"
 		"OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE"
 		"SOFTWARE."	
+	);
+	msgBox.exec();
+}
+
+// ---------------------------------------------------------------------
+
+void MainWindow::actionAuthor() {
+	QMessageBox msgBox;
+	msgBox.setModal( true );
+	msgBox.setText(
+		"Author: Evgenii Sopov\n"
+		"E-mail: mrseakg@gmail.com\n"
+		"Web-site: http://inventory-files.sea-kg.com"
 	);
 	msgBox.exec();
 }
