@@ -7,6 +7,7 @@
 #include <iostream>
 #include <QApplication>
 #include <QDir>
+#include <QIcon>
 #include <QFileDialog>
 #include "detection/detection.h"
 
@@ -15,7 +16,7 @@ MainWindow::MainWindow(QString sWorkDirectory)
 	m_sWorkDirectory = sWorkDirectory;
     setWindowTitle("Inventory-files");
     setMinimumSize(1000, 600);
-
+	setWindowIcon(QIcon(":/www/images/inventory-files.png"));
 	initConnection();
 
     // actions
