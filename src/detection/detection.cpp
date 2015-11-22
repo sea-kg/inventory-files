@@ -2,14 +2,18 @@
 #include "src/detection/animation.h"
 #include "src/detection/application.h"
 #include "src/detection/archiv.h"
+#include "src/detection/batchfile.h"
+#include "src/detection/binarydata.h"
 #include "src/detection/cache.h"
 #include "src/detection/config.h"
 #include "src/detection/css.h"
 #include "src/detection/dia.h"
 #include "src/detection/diskimage.h"
+#include "src/detection/directdraw.h"
 #include "src/detection/document.h"
 #include "src/detection/font.h"
 #include "src/detection/gimp.h"
+#include "src/detection/guitarpro.h"
 #include "src/detection/image.h"
 #include "src/detection/javascript.h"
 #include "src/detection/json.h"
@@ -18,11 +22,13 @@
 #include "src/detection/makefile.h"
 #include "src/detection/mercurial.h"
 #include "src/detection/php.h"
+#include "src/detection/playlist.h"
 #include "src/detection/presentation.h"
 #include "src/detection/project.h"
 #include "src/detection/python.h"
 #include "src/detection/setup.h"
 #include "src/detection/sound.h"
+#include "src/detection/soundforgepeakfile.h"
 #include "src/detection/sourcecodecpp.h"
 #include "src/detection/text.h"
 #include "src/detection/video.h"
@@ -36,14 +42,18 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionAnimation()));
 	m_pDetections.push_back((IDetection *)(new DetectionApplication()));
 	m_pDetections.push_back((IDetection *)(new DetectionArchiv()));
+	m_pDetections.push_back((IDetection *)(new DetectionBatchFile()));
+	m_pDetections.push_back((IDetection *)(new DetectionBinaryData()));
 	m_pDetections.push_back((IDetection *)(new DetectionCache()));
 	m_pDetections.push_back((IDetection *)(new DetectionConfig()));
 	m_pDetections.push_back((IDetection *)(new DetectionCSS()));
 	m_pDetections.push_back((IDetection *)(new DetectionDia()));
 	m_pDetections.push_back((IDetection *)(new DetectionDiskImage()));
+	m_pDetections.push_back((IDetection *)(new DetectionDirectDraw()));
 	m_pDetections.push_back((IDetection *)(new DetectionDocument()));
 	m_pDetections.push_back((IDetection *)(new DetectionFont()));
 	m_pDetections.push_back((IDetection *)(new DetectionGimp()));
+	m_pDetections.push_back((IDetection *)(new DetectionGuitarPro()));
 	m_pDetections.push_back((IDetection *)(new DetectionImage()));
 	m_pDetections.push_back((IDetection *)(new DetectionJavaScript()));
 	m_pDetections.push_back((IDetection *)(new DetectionJson()));
@@ -52,11 +62,13 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionMakefile()));
 	m_pDetections.push_back((IDetection *)(new DetectionMercurial()));
 	m_pDetections.push_back((IDetection *)(new DetectionPHP()));
+	m_pDetections.push_back((IDetection *)(new DetectionPlayList()));
 	m_pDetections.push_back((IDetection *)(new DetectionPresentation()));
 	m_pDetections.push_back((IDetection *)(new DetectionProject()));
 	m_pDetections.push_back((IDetection *)(new DetectionPython()));
 	m_pDetections.push_back((IDetection *)(new DetectionSetup()));
 	m_pDetections.push_back((IDetection *)(new DetectionSound()));
+	m_pDetections.push_back((IDetection *)(new DetectionSoundForgePeakFile()));
 	m_pDetections.push_back((IDetection *)(new DetectionSourceCodeCpp()));
 	m_pDetections.push_back((IDetection *)(new DetectionText()));
 	m_pDetections.push_back((IDetection *)(new DetectionVideo()));

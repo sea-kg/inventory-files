@@ -11,7 +11,16 @@ bool DetectionDocument::isType(const QFileInfo &fi, QString &type, QString &subt
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "DOC" || sSuffix == "ODT" || sSuffix == "PDF" || sSuffix == "DJVU" || sSuffix == "CHM");
+	bool bType = (
+		sSuffix == "DOC"
+		|| sSuffix == "ODT"
+		|| sSuffix == "PDF"
+		|| sSuffix == "DJVU"
+		|| sSuffix == "CHM"
+		|| sSuffix == "CHM"
+		|| sSuffix == "RTF"
+		|| sSuffix == "DOCX"
+	);
 	if (bType) {
 		type = "Document";
 		subtype = "todo"; // version and another information

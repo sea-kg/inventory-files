@@ -19,14 +19,18 @@ SOURCES += \
 	src/detection/animation.cpp	\
 	src/detection/application.cpp \
 	src/detection/archiv.cpp \
+	src/detection/batchfile.cpp \
+	src/detection/binarydata.cpp \
 	src/detection/cache.cpp \
 	src/detection/config.cpp \
 	src/detection/css.cpp \
 	src/detection/dia.cpp \
 	src/detection/diskimage.cpp \
+	src/detection/directdraw.cpp \
 	src/detection/document.cpp \
 	src/detection/font.cpp \
 	src/detection/gimp.cpp \
+	src/detection/guitarpro.cpp \
 	src/detection/image.cpp \
 	src/detection/javascript.cpp \
 	src/detection/json.cpp \
@@ -35,11 +39,13 @@ SOURCES += \
 	src/detection/makefile.cpp \
 	src/detection/mercurial.cpp \
 	src/detection/php.cpp \
+	src/detection/playlist.cpp \
 	src/detection/presentation.cpp \
 	src/detection/project.cpp \
 	src/detection/python.cpp \
 	src/detection/setup.cpp \
 	src/detection/sound.cpp \
+	src/detection/soundforgepeakfile.cpp \
 	src/detection/sourcecodecpp.cpp \
 	src/detection/text.cpp \
 	src/detection/video.cpp \
@@ -58,14 +64,18 @@ HEADERS += \
 	src/detection/animation.h \
 	src/detection/application.h \
 	src/detection/archiv.h \
+	src/detection/batchfile.h \
+	src/detection/binarydata.h \
 	src/detection/cache.h \
 	src/detection/config.h \
 	src/detection/css.h \
 	src/detection/dia.h \
 	src/detection/diskimage.h \
+	src/detection/directdraw.h \
 	src/detection/document.h \
 	src/detection/font.h \
 	src/detection/gimp.h \
+	src/detection/guitarpro.h \
 	src/detection/image.h \
 	src/detection/javascript.h \
 	src/detection/json.h \
@@ -74,11 +84,13 @@ HEADERS += \
 	src/detection/makefile.h \
 	src/detection/mercurial.h \
 	src/detection/php.h \
+	src/detection/playlist.h \
 	src/detection/presentation.h \
 	src/detection/project.h \
 	src/detection/python.h \
 	src/detection/setup.h \
 	src/detection/sound.h \
+	src/detection/soundforgepeakfile.h \
 	src/detection/sourcecodecpp.h \
 	src/detection/text.h \
 	src/detection/video.h \

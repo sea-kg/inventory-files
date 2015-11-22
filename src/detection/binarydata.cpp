@@ -1,23 +1,19 @@
-#include "webpage.h"
+#include "binarydata.h"
 
-void DetectionWebPage::types(QStringList &list) {
-	list << "Web Page";
+void DetectionBinaryData::types(QStringList &list) {
+	list << "Binary Data";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionWebPage::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionBinaryData::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (
-		sSuffix == "HTML"
-		|| sSuffix == "HTM"
-		|| sSuffix == "AXD"
-	);
+	bool bType = (sSuffix == "DAT");
 	if (bType) {
-		type = "Web Page";
+		type = "Binary Data";
 		subtype = "todo"; // version and another information
 	}
 	return bType;

@@ -1,23 +1,19 @@
-#include "webpage.h"
+#include "batchfile.h"
 
-void DetectionWebPage::types(QStringList &list) {
-	list << "Web Page";
+void DetectionBatchFile::types(QStringList &list) {
+	list << "Batch File";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionWebPage::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionBatchFile::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (
-		sSuffix == "HTML"
-		|| sSuffix == "HTM"
-		|| sSuffix == "AXD"
-	);
+	bool bType = (sSuffix == "BAT");
 	if (bType) {
-		type = "Web Page";
+		type = "Batch File";
 		subtype = "todo"; // version and another information
 	}
 	return bType;
