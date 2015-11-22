@@ -23,6 +23,7 @@ SOURCES += \
 	src/detection/config.cpp \
 	src/detection/css.cpp \
 	src/detection/dia.cpp \
+	src/detection/diskimage.cpp \
 	src/detection/document.cpp \
 	src/detection/font.cpp \
 	src/detection/gimp.cpp \
@@ -37,6 +38,7 @@ SOURCES += \
 	src/detection/presentation.cpp \
 	src/detection/project.cpp \
 	src/detection/python.cpp \
+	src/detection/setup.cpp \
 	src/detection/sound.cpp \
 	src/detection/sourcecodecpp.cpp \
 	src/detection/text.cpp \
@@ -60,6 +62,7 @@ HEADERS += \
 	src/detection/config.h \
 	src/detection/css.h \
 	src/detection/dia.h \
+	src/detection/diskimage.h \
 	src/detection/document.h \
 	src/detection/font.h \
 	src/detection/gimp.h \
@@ -74,6 +77,7 @@ HEADERS += \
 	src/detection/presentation.h \
 	src/detection/project.h \
 	src/detection/python.h \
+	src/detection/setup.h \
 	src/detection/sound.h \
 	src/detection/sourcecodecpp.h \
 	src/detection/text.h \

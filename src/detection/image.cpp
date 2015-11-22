@@ -11,7 +11,7 @@ bool DetectionImage::isType(const QFileInfo &fi, QString &type, QString &subtype
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "PNG" || sSuffix == "JPG" || sSuffix == "JPEG" || sSuffix == "GIF" || sSuffix == "SVG" || sSuffix == "ICO");
+	bool bType = (sSuffix == "PNG" || sSuffix == "JPG" || sSuffix == "JPEG" || sSuffix == "GIF" || sSuffix == "SVG" || sSuffix == "ICO" || sSuffix == "BMP");
 	if (bType) {
 		type = "Image";
 		subtype = "todo"; // version and another information

@@ -6,6 +6,7 @@
 #include "src/detection/config.h"
 #include "src/detection/css.h"
 #include "src/detection/dia.h"
+#include "src/detection/diskimage.h"
 #include "src/detection/document.h"
 #include "src/detection/font.h"
 #include "src/detection/gimp.h"
@@ -20,6 +21,7 @@
 #include "src/detection/presentation.h"
 #include "src/detection/project.h"
 #include "src/detection/python.h"
+#include "src/detection/setup.h"
 #include "src/detection/sound.h"
 #include "src/detection/sourcecodecpp.h"
 #include "src/detection/text.h"
@@ -38,6 +40,7 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionConfig()));
 	m_pDetections.push_back((IDetection *)(new DetectionCSS()));
 	m_pDetections.push_back((IDetection *)(new DetectionDia()));
+	m_pDetections.push_back((IDetection *)(new DetectionDiskImage()));
 	m_pDetections.push_back((IDetection *)(new DetectionDocument()));
 	m_pDetections.push_back((IDetection *)(new DetectionFont()));
 	m_pDetections.push_back((IDetection *)(new DetectionGimp()));
@@ -52,6 +55,7 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionPresentation()));
 	m_pDetections.push_back((IDetection *)(new DetectionProject()));
 	m_pDetections.push_back((IDetection *)(new DetectionPython()));
+	m_pDetections.push_back((IDetection *)(new DetectionSetup()));
 	m_pDetections.push_back((IDetection *)(new DetectionSound()));
 	m_pDetections.push_back((IDetection *)(new DetectionSourceCodeCpp()));
 	m_pDetections.push_back((IDetection *)(new DetectionText()));

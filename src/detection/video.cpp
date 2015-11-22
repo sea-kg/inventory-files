@@ -11,7 +11,7 @@ bool DetectionVideo::isType(const QFileInfo &fi, QString &type, QString &subtype
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "MP4" || sSuffix == "AVI");
+	bool bType = (sSuffix == "MP4" || sSuffix == "AVI" || sSuffix == "MPG");
 	if (bType) {
 		type = "Video";
 		subtype = "todo"; // version and another information
