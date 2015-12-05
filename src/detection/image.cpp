@@ -19,6 +19,7 @@ bool DetectionImage::isType(const QFileInfo &fi, QString &type, QString &subtype
 		|| sSuffix == "ICO"
 		|| sSuffix == "BMP"
 		|| sSuffix == "TGA"
+		|| sSuffix == "SVGZ"
 	);
 	if (bType) {
 		type = "Image";

@@ -1,19 +1,19 @@
-#include "python.h"
+#include "torrent.h"
 
-void DetectionPython::types(QStringList &list) {
-	list << "Python";
+void DetectionTorrent::types(QStringList &list) {
+	list << "Torrent";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionPython::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionTorrent::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "PY" || sSuffix == "PYC");
+	bool bType = (sSuffix == "TORRENT" || sSuffix == "THOST");
 	if (bType) {
-		type = "Python";
+		type = "Torrent";
 		subtype = "todo"; // version and another information
 	}
 	return bType;

@@ -1,19 +1,19 @@
-#include "python.h"
+#include "sign.h"
 
-void DetectionPython::types(QStringList &list) {
-	list << "Python";
+void DetectionSign::types(QStringList &list) {
+	list << "Signature";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionPython::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionSign::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "PY" || sSuffix == "PYC");
+	bool bType = (sSuffix == "ASC" || sSuffix == "SIG");
 	if (bType) {
-		type = "Python";
+		type = "Signature";
 		subtype = "todo"; // version and another information
 	}
 	return bType;

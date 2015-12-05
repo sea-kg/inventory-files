@@ -11,7 +11,7 @@ bool DetectionProject::isType(const QFileInfo &fi, QString &type, QString &subty
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "PRO");
+	bool bType = (sSuffix == "PRO" || sSuffix == "KDEVELOP");
 	if (bType) {
 		type = "Project";
 		subtype = "todo"; // version and another information

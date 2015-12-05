@@ -1,19 +1,19 @@
-#include "python.h"
+#include "link.h"
 
-void DetectionPython::types(QStringList &list) {
-	list << "Python";
+void DetectionLink::types(QStringList &list) {
+	list << "Link";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionPython::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionLink::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "PY" || sSuffix == "PYC");
+	bool bType = (sSuffix == "DESKTOP");
 	if (bType) {
-		type = "Python";
+		type = "Link";
 		subtype = "todo"; // version and another information
 	}
 	return bType;

@@ -1,19 +1,19 @@
-#include "python.h"
+#include "ruby.h"
 
-void DetectionPython::types(QStringList &list) {
-	list << "Python";
+void DetectionRuby::types(QStringList &list) {
+	list << "Ruby";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionPython::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionRuby::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "PY" || sSuffix == "PYC");
+	bool bType = (sSuffix == "RB");
 	if (bType) {
-		type = "Python";
+		type = "Ruby";
 		subtype = "todo"; // version and another information
 	}
 	return bType;

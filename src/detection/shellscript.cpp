@@ -1,19 +1,22 @@
-#include "python.h"
+#include "shellscript.h"
 
-void DetectionPython::types(QStringList &list) {
-	list << "Python";
+void DetectionShellScript::types(QStringList &list) {
+	list << "Shell Script";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionPython::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionShellScript::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "PY" || sSuffix == "PYC");
+	bool bType = (sSuffix == "SH"
+		|| sName == "COMPILE"
+		|| sName == "CONFIGURE"
+	);
 	if (bType) {
-		type = "Python";
+		type = "Shell Script";
 		subtype = "todo"; // version and another information
 	}
 	return bType;

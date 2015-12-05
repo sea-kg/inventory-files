@@ -11,7 +11,7 @@ bool DetectionSetup::isType(const QFileInfo &fi, QString &type, QString &subtype
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "MSI" || sSuffix == "DEB");
+	bool bType = (sSuffix == "MSI" || sSuffix == "DEB" || sSuffix == "RPM");
 	if (bType) {
 		type = "Setup";
 		subtype = "todo"; // version and another information

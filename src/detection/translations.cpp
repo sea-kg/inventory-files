@@ -1,19 +1,19 @@
-#include "python.h"
+#include "translations.h"
 
-void DetectionPython::types(QStringList &list) {
-	list << "Python";
+void DetectionTranslations::types(QStringList &list) {
+	list << "Translations";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionPython::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionTranslations::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "PY" || sSuffix == "PYC");
+	bool bType = (sSuffix == "PO");
 	if (bType) {
-		type = "Python";
+		type = "Translations";
 		subtype = "todo"; // version and another information
 	}
 	return bType;

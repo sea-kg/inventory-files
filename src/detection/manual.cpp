@@ -1,19 +1,19 @@
-#include "python.h"
+#include "manual.h"
 
-void DetectionPython::types(QStringList &list) {
-	list << "Python";
+void DetectionManual::types(QStringList &list) {
+	list << "Manual";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionPython::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionManual::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "PY" || sSuffix == "PYC");
+	bool bType = (sSuffix == "1" && sPath.contains("/DOCS/MAN/"));
 	if (bType) {
-		type = "Python";
+		type = "Manual";
 		subtype = "todo"; // version and another information
 	}
 	return bType;

@@ -11,7 +11,8 @@ bool DetectionConfig::isType(const QFileInfo &fi, QString &type, QString &subtyp
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "INI" || sSuffix == "CONF");
+	bool bType = (sSuffix == "INI" || sSuffix == "CONF" || sSuffix == "KCFG" || sSuffix == "KCFGC"
+		|| sName == "CONFIG.GUESS");
 	if (bType) {
 		type = "Config";
 		subtype = "todo"; // version and another information

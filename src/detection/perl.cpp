@@ -1,19 +1,19 @@
-#include "python.h"
+#include "perl.h"
 
-void DetectionPython::types(QStringList &list) {
-	list << "Python";
+void DetectionPerl::types(QStringList &list) {
+	list << "Perl";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionPython::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionPerl::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "PY" || sSuffix == "PYC");
+	bool bType = (sSuffix == "PL");
 	if (bType) {
-		type = "Python";
+		type = "Perl";
 		subtype = "todo"; // version and another information
 	}
 	return bType;
