@@ -68,7 +68,7 @@ void Job::run() {
 						bContains = true; //query.value(0).toString();
 					}
 				}
-				
+
 				QString sType;
 				QString sSubType;
 				if (!m_pDetection->isType(file, sType, sSubType)) {
@@ -78,18 +78,21 @@ void Job::run() {
 				
 				if (!bContains) {
 					QSqlQuery query(*m_pDB);
-					query.prepare("INSERT INTO files(path,name,md5,comment,ext,type,size,lastscanning) "
-						"VALUES(:path,:name,:md5,:comment,:ext,:type,:size,CURRENT_TIMESTAMP)");
+					query.prepare("INSERT INTO files(path,path_upper,name,name_upper,md5,comment,comment_upper,ext,type,size,lastscanning) "
+						"VALUES(:path,:path_upper,:name,:name_upper,:md5,:comment,:comment_upper,:ext,:type,:size,CURRENT_TIMESTAMP)");
 					query.bindValue(":path", sFilePath);
+					query.bindValue(":path_upper", sFilePath.toUpper());
 					query.bindValue(":name", file.fileName());
+					query.bindValue(":name_upper", file.fileName().toUpper());
 					query.bindValue(":md5", "TODO");
 					query.bindValue(":comment", "");
+					query.bindValue(":comment_upper", "");
 					query.bindValue(":ext", file.suffix().toUpper());
 					query.bindValue(":type", sType);
 					query.bindValue(":size", file.size());
 					query.exec();
 				} else {
-					// todo optimize update 
+					// todo optimize update
 					QSqlQuery query(*m_pDB);
 					query.prepare("UPDATE files SET "
 						// " md5 = :md5, "

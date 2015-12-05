@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
 	QDir dir(QDir::homePath());
 	{
 		if (!dir.exists(".inventory-files")) {
-			if (!dir.mkdir(".inventory-files")) {
+			if (dir.mkdir(".inventory-files")) {
 				dir.cd(".inventory-files");
 				std::cout << "created work directory ~/.inventory-files\n";
 			} else {

@@ -24,7 +24,6 @@ MainWindow::MainWindow(QString sWorkDirectory)
     // menu
     {
 		m_pMenuFile = menuBar()->addMenu("&File");
-
 		m_pMenuHelp = menuBar()->addMenu("&Help");
 		m_pMenuHelp->addAction(m_pActionAuthor);
 		m_pMenuHelp->addAction(m_pActionLicense);
@@ -183,7 +182,7 @@ void MainWindow::btnRemoveDirectory() {
 // ---------------------------------------------------------------------
 
 void MainWindow::btnScanDirectory() {
-	
+
 	// Get all selections
 	QStringList listRemove;
     QModelIndexList indexes = m_pTableView_Directories->selectionModel()->selection().indexes();
@@ -242,9 +241,12 @@ void MainWindow::initConnection() {
 		query.exec("create table files "
 				  "(id integer primary key, "
 				  "path varchar(1024), "
+				  "path_upper varchar(1024), "
 				  "name varchar(255), "
+				  "name_upper varchar(255), "
 				  "md5 varchar(255), "
 				  "comment varchar(1024), "
+				  "comment_upper varchar(1024), "
 				  "ext varchar(20), "
 				  "type varchar(20), "
 				  "size integer, "
@@ -461,11 +463,11 @@ void MainWindow::btnFilesSearch() {
 
 	QStringList listQuery; 
 	if (m_pLineEditNameLike->displayText() != "") {
-		listQuery << "name LIKE '%" + m_pLineEditNameLike->displayText() + "%'";
+		listQuery << "name_upper LIKE '%" + m_pLineEditNameLike->displayText().toUpper() + "%'";
 	}
 
 	if (m_pLineEditPathLike->displayText() != "") {
-		listQuery << "path LIKE '%" + m_pLineEditPathLike->displayText() + "%'";
+		listQuery << "path_upper LIKE '%" + m_pLineEditPathLike->displayText().toUpper() + "%'";
 	}
 
 	QString sType = m_pComboBox->itemText(m_pComboBox->currentIndex());
@@ -478,10 +480,10 @@ void MainWindow::btnFilesSearch() {
 	if (sSize != "") {
 		listQuery << "size " + sSize + " " + QString::number(nSize);
 	}
-	
+
 	QString sComment = m_pLineEditComment->displayText();
 	if (sComment != "") {
-		listQuery << "comment LIKE '%" + sComment + "%'";
+		listQuery << "comment_upper LIKE '%" + sComment.toUpper() + "%'";
 	}
 
 	QString sExt = m_pLineEditExt->displayText();
@@ -495,8 +497,8 @@ void MainWindow::btnFilesSearch() {
 	}
 	// std::cout << where.toStdString() << "\n";
 
-	// m_pFilesModel->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files " + where);
-	m_pFilesModel->setQuery("SELECT name, ext, type, size, upper(path) as path, lastscanning  FROM files " + where);
+//  m_pFilesModel->setQuery("SELECT name, ext, type, size, path, comment, md5, lastscanning  FROM files " + where);
+	m_pFilesModel->setQuery("SELECT name, ext, type, size, path, lastscanning  FROM files " + where);
 }
 
 // ---------------------------------------------------------------------
