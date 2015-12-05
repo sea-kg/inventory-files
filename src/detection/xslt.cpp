@@ -1,19 +1,19 @@
-#include "guitarpro.h"
+#include "xslt.h"
 
-void DetectionGuitarPro::types(QStringList &list) {
-	list << "Guitar Pro";
+void DetectionXSLT::types(QStringList &list) {
+	list << "XSLT";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionGuitarPro::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionXSLT::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "GP5" || sSuffix == "GP4" || sSuffix == "FX" || sSuffix == "GPP" || sSuffix == "GPL");
+	bool bType = (sSuffix == "XSL");
 	if (bType) {
-		type = "Guitar Pro";
+		type = "XSLT";
 		subtype = "todo"; // version and another information
 	}
 	return bType;

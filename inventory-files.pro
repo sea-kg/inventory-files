@@ -67,6 +67,7 @@ SOURCES += \
 	src/detection/virtual_machine.cpp \
 	src/detection/webpage.cpp \
 	src/detection/xml.cpp \
+	src/detection/xslt.cpp \
 	src/detection/detection.cpp	\
 
 HEADERS += \
@@ -127,6 +128,7 @@ HEADERS += \
 	src/detection/virtual_machine.h \
 	src/detection/webpage.h \
 	src/detection/xml.h \
+	src/detection/xslt.h \
 	src/detection/detection.h \
 	
 RESOURCES     = inventory-files.qrc

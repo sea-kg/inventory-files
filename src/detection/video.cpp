@@ -17,6 +17,8 @@ bool DetectionVideo::isType(const QFileInfo &fi, QString &type, QString &subtype
 		|| sSuffix == "MPG"
 		|| sSuffix == "MKV"
 		|| sSuffix == "FLV"
+		|| sSuffix == "MOV"
+		|| sSuffix == "WMV"
 	);
 	if (bType) {
 		type = "Video";

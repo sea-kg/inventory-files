@@ -11,7 +11,9 @@ bool DetectionArchiv::isType(const QFileInfo &fi, QString &type, QString &subtyp
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "RAR" || sSuffix == "ZIP" || sSuffix == "7Z" || sSuffix == "TAR" || sSuffix == "GZ" || sSuffix == "BZ2" || sSuffix == "TGZ");
+	bool bType = (sSuffix == "RAR" || sSuffix == "ZIP" || sSuffix == "7Z" || sSuffix == "TAR" || sSuffix == "GZ" || sSuffix == "BZ2" || sSuffix == "TGZ"
+		|| sSuffix == "NTH"
+	);
 	if (bType) {
 		type = "Archiv";
 		subtype = "todo"; // version and another information

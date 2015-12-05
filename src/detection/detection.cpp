@@ -50,6 +50,7 @@
 #include "src/detection/virtual_machine.h"
 #include "src/detection/webpage.h"
 #include "src/detection/xml.h"
+#include "src/detection/xslt.h"
 
 #include <iostream>
 
@@ -105,6 +106,7 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionVirtualMachine()));
 	m_pDetections.push_back((IDetection *)(new DetectionWebPage()));
 	m_pDetections.push_back((IDetection *)(new DetectionXML()));
+	m_pDetections.push_back((IDetection *)(new DetectionXSLT()));
 }
 
 // -------------------------------------------------------------------
