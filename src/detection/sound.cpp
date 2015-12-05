@@ -11,7 +11,7 @@ bool DetectionSound::isType(const QFileInfo &fi, QString &type, QString &subtype
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "WAV" || sSuffix == "FLAC" || sSuffix == "MP3");
+	bool bType = (sSuffix == "WAV" || sSuffix == "FLAC" || sSuffix == "MP3" || sSuffix == "MID");
 	if (bType) {
 		type = "Sound";
 		subtype = "todo"; // version and another information

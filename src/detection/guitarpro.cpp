@@ -11,7 +11,7 @@ bool DetectionGuitarPro::isType(const QFileInfo &fi, QString &type, QString &sub
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "GP5");
+	bool bType = (sSuffix == "GP5" || sSuffix == "GP4");
 	if (bType) {
 		type = "Guitar Pro";
 		subtype = "todo"; // version and another information
