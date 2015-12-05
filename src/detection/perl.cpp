@@ -12,6 +12,7 @@ bool DetectionPerl::isType(const QFileInfo &fi, QString &type, QString &subtype)
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
 	bool bType = (sSuffix == "PL");
+	// read first line...  "#!/usr/bin/perl"
 	if (bType) {
 		type = "Perl";
 		subtype = "todo"; // version and another information

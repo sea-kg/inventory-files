@@ -22,6 +22,7 @@ SOURCES += \
 	src/detection/backup.cpp \
 	src/detection/batchfile.cpp \
 	src/detection/binarydata.cpp \
+	src/detection/binary_diff.cpp \
 	src/detection/cache.cpp \
 	src/detection/config.cpp \
 	src/detection/css.cpp \
@@ -30,10 +31,12 @@ SOURCES += \
 	src/detection/diskimage.cpp \
 	src/detection/directdraw.cpp \
 	src/detection/document.cpp \
+	src/detection/doxyfile.cpp \
 	src/detection/font.cpp \
 	src/detection/gimp.cpp \
 	src/detection/guitarpro.cpp \
 	src/detection/image.cpp \
+	src/detection/java_application.cpp \
 	src/detection/javascript.cpp \
 	src/detection/json.cpp \
 	src/detection/library.cpp \
@@ -48,6 +51,7 @@ SOURCES += \
 	src/detection/presentation.cpp \
 	src/detection/project.cpp \
 	src/detection/python.cpp \
+	src/detection/rc.cpp \
 	src/detection/ruby.cpp \
 	src/detection/setup.cpp \
 	src/detection/shellscript.cpp \
@@ -78,6 +82,7 @@ HEADERS += \
 	src/detection/backup.h \
 	src/detection/batchfile.h \
 	src/detection/binarydata.h \
+	src/detection/binary_diff.h \
 	src/detection/cache.h \
 	src/detection/config.h \
 	src/detection/css.h \
@@ -86,10 +91,12 @@ HEADERS += \
 	src/detection/diskimage.h \
 	src/detection/directdraw.h \
 	src/detection/document.h \
+	src/detection/doxyfile.h \
 	src/detection/font.h \
 	src/detection/gimp.h \
 	src/detection/guitarpro.h \
 	src/detection/image.h \
+	src/detection/java_application.h \
 	src/detection/javascript.h \
 	src/detection/json.h \
 	src/detection/library.h \
@@ -104,6 +111,7 @@ HEADERS += \
 	src/detection/presentation.h \
 	src/detection/project.h \
 	src/detection/python.h \
+	src/detection/rc.h \
 	src/detection/ruby.h \
 	src/detection/setup.h \
 	src/detection/shellscript.h \

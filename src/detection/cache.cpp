@@ -11,7 +11,8 @@ bool DetectionCache::isType(const QFileInfo &fi, QString &type, QString &subtype
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "HEU" || sSuffix == "SWZ") && sPath.contains(QString(".adobe/Flash_Player/AssetCache").toUpper());
+	bool bType = ((sSuffix == "HEU" || sSuffix == "SWZ") && sPath.contains(QString(".adobe/Flash_Player/AssetCache").toUpper()))
+		|| (sName == "THUMBS.DB");
 	if (bType) {
 		type = "Cache";
 		subtype = "todo"; // version and another information

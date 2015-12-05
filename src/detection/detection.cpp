@@ -5,6 +5,7 @@
 #include "src/detection/backup.h"
 #include "src/detection/batchfile.h"
 #include "src/detection/binarydata.h"
+#include "src/detection/binary_diff.h"
 #include "src/detection/cache.h"
 #include "src/detection/config.h"
 #include "src/detection/css.h"
@@ -13,10 +14,12 @@
 #include "src/detection/diskimage.h"
 #include "src/detection/directdraw.h"
 #include "src/detection/document.h"
+#include "src/detection/doxyfile.h"
 #include "src/detection/font.h"
 #include "src/detection/gimp.h"
 #include "src/detection/guitarpro.h"
 #include "src/detection/image.h"
+#include "src/detection/java_application.h"
 #include "src/detection/javascript.h"
 #include "src/detection/json.h"
 #include "src/detection/library.h"
@@ -31,6 +34,7 @@
 #include "src/detection/presentation.h"
 #include "src/detection/project.h"
 #include "src/detection/python.h"
+#include "src/detection/rc.h"
 #include "src/detection/ruby.h"
 #include "src/detection/setup.h"
 #include "src/detection/shellscript.h"
@@ -56,6 +60,7 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionBackup()));
 	m_pDetections.push_back((IDetection *)(new DetectionBatchFile()));
 	m_pDetections.push_back((IDetection *)(new DetectionBinaryData()));
+	m_pDetections.push_back((IDetection *)(new DetectionBinaryDiff()));
 	m_pDetections.push_back((IDetection *)(new DetectionCache()));
 	m_pDetections.push_back((IDetection *)(new DetectionConfig()));
 	m_pDetections.push_back((IDetection *)(new DetectionCSS()));
@@ -64,10 +69,12 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionDiskImage()));
 	m_pDetections.push_back((IDetection *)(new DetectionDirectDraw()));
 	m_pDetections.push_back((IDetection *)(new DetectionDocument()));
+	m_pDetections.push_back((IDetection *)(new DetectionDoxyfile()));
 	m_pDetections.push_back((IDetection *)(new DetectionFont()));
 	m_pDetections.push_back((IDetection *)(new DetectionGimp()));
 	m_pDetections.push_back((IDetection *)(new DetectionGuitarPro()));
 	m_pDetections.push_back((IDetection *)(new DetectionImage()));
+	m_pDetections.push_back((IDetection *)(new DetectionJavaApplication()));
 	m_pDetections.push_back((IDetection *)(new DetectionJavaScript()));
 	m_pDetections.push_back((IDetection *)(new DetectionJson()));
 	m_pDetections.push_back((IDetection *)(new DetectionLibrary()));
@@ -82,6 +89,7 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionPresentation()));
 	m_pDetections.push_back((IDetection *)(new DetectionProject()));
 	m_pDetections.push_back((IDetection *)(new DetectionPython()));
+	m_pDetections.push_back((IDetection *)(new DetectionRC()));
 	m_pDetections.push_back((IDetection *)(new DetectionRuby()));
 	m_pDetections.push_back((IDetection *)(new DetectionSetup()));
 	m_pDetections.push_back((IDetection *)(new DetectionShellScript()));

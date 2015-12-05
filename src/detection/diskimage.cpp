@@ -23,7 +23,7 @@ bool DetectionDiskImage::isType(const QFileInfo &fi, QString &type, QString &sub
 		|| sSuffix == "DMG"
 		|| sSuffix == "CCD"
 		|| sSuffix == "IMG"
-		|| sSuffix == "SUB"
+		|| (sSuffix == "SUB" && sName != "CONFIG.SUB")
 		|| sSuffix == "DVD"
 		|| sSuffix == "ISZ"
 		|| sSuffix == "CDI"

@@ -11,7 +11,7 @@ bool DetectionLogFile::isType(const QFileInfo &fi, QString &type, QString &subty
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "LOG");
+	bool bType = (sSuffix == "LOG" || sSuffix == "AUTOCONF_TRACE");
 	if (bType) {
 		type = "Log File";
 		subtype = "todo"; // version and another information

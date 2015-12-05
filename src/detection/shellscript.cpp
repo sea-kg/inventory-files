@@ -11,9 +11,11 @@ bool DetectionShellScript::isType(const QFileInfo &fi, QString &type, QString &s
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
+	// read first line: #! /bin/sh
 	bool bType = (sSuffix == "SH"
 		|| sName == "COMPILE"
 		|| sName == "CONFIGURE"
+		|| sName == "KTSHELL"
 	);
 	if (bType) {
 		type = "Shell Script";

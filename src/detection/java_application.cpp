@@ -1,19 +1,19 @@
-#include "xml.h"
+#include "java_application.h"
 
-void DetectionXML::types(QStringList &list) {
-	list << "XML";
+void DetectionJavaApplication::types(QStringList &list) {
+	list << "Java Application";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionXML::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionJavaApplication::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "XML" || sSuffix == "CW");
+	bool bType = (sSuffix == "JAR");
 	if (bType) {
-		type = "XML";
+		type = "Java Application";
 		subtype = "todo"; // version and another information
 	}
 	return bType;

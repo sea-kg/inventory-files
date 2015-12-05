@@ -1,19 +1,19 @@
-#include "xml.h"
+#include "rc.h"
 
-void DetectionXML::types(QStringList &list) {
-	list << "XML";
+void DetectionRC::types(QStringList &list) {
+	list << "Compiler Resource File";
 }
 
 // --------------------------------------------------------------------
 
-bool DetectionXML::isType(const QFileInfo &fi, QString &type, QString &subtype) {
+bool DetectionRC::isType(const QFileInfo &fi, QString &type, QString &subtype) {
 	QString sSuffix = fi.suffix().toUpper();
 	QString sPath = fi.canonicalFilePath().toUpper();
 	QString sName = fi.fileName().toUpper();
 	// TODO: look inside file (search structure)
-	bool bType = (sSuffix == "XML" || sSuffix == "CW");
+	bool bType = (sSuffix == "RC");
 	if (bType) {
-		type = "XML";
+		type = "Compiler Resource File";
 		subtype = "todo"; // version and another information
 	}
 	return bType;
