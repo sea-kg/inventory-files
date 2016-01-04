@@ -31,3 +31,4 @@ Makefile
 tmp/*
 *.bin
 qrc_inventory-files.cpp
+*.pro.user
