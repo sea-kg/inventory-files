@@ -1,0 +1,13 @@
+Source: inventory-files
+Section: devel
+Priority: optional
+Maintainer: Evgenii Sopov <mrseakg@gmail.com>
+Build-Depends: cmake, build-essential, pkg-config, qtbase5-dev, zlib1g-dev, qt5-default, libpng-dev
+Homepage: https://sea-kg.com/inventory-files/
+
+Package: inventory-files
+Architecture: any
+Depends: zlibc, zlib1g, libpng16-16, libqt5sql5, libqt5sql5-sqlite, debconf (>= 0.2.1), dbconfig-common
+Description: Inventory Files
+ Open-Source program for inventorization of files on your computer
+
