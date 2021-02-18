@@ -33,3 +33,5 @@ tmp/*
 qrc_inventory-files.cpp
 *.pro.user
 www/dist/*
+.qmake.stash
+inventory-files

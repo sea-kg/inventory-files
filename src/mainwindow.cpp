@@ -17,7 +17,7 @@ MainWindow::MainWindow(QString sWorkDirectory)
 	m_sWorkDirectory = sWorkDirectory;
     setWindowTitle("Inventory-files");
     setMinimumSize(1000, 600);
-	setWindowIcon(QIcon(":/www/images/inventory-files.png"));
+	setWindowIcon(QIcon(":/res/inventory-files.png"));
 	initConnection();
 	initActions();
 
@@ -71,7 +71,7 @@ void MainWindow::actionLicense() {
 	msgBox.setModal( true );
 	msgBox.setText(
 		"The MIT License (MIT)\n\n"
-		"Copyright (c) 2015 Evgenii Sopov\n\n"
+		"Copyright (c) 2015-2021 Evgenii Sopov\n\n"
 		"Permission is hereby granted, free of charge, to any person obtaining a copy"
 		"of this software and associated documentation files (the \"Software\"), to deal"
 		"in the Software without restriction, including without limitation the rights"
@@ -99,7 +99,7 @@ void MainWindow::actionAuthor() {
 	msgBox.setText(
 		"Author: Evgenii Sopov\n"
 		"E-mail: mrseakg@gmail.com\n"
-		"Web-site: http://inventory-files.sea-kg.com"
+		"Web-site: https://sea-kg.com/inventory-files/"
 	);
 	msgBox.exec();
 }

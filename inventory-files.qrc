@@ -1,5 +1,5 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
-    <file>www/images/inventory-files.png</file>
+    <file>res/inventory-files.png</file>
 </qresource>
 </RCC>

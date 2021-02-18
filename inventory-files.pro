@@ -6,7 +6,7 @@ QT += sql
 INCLUDEPATH += 3rdparty/clucene/src/core/
 INCLUDEPATH += 3rdparty/clucene/src/core/CLucene/
 
-TARGET = inventory-files.bin
+TARGET = inventory-files
 CONFIG += console release
 TEMPLATE = app
 SOURCES += \
