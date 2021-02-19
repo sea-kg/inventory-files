@@ -1,19 +1,26 @@
 # inventory-files
 Program for inventory files on your computer (for linux)
 
-# requriments
+### requriments
+
 Qt >5
+Note:
+for install latest version
+```
+$ sudo apt-get install git-core qt5-default
+```
 
-	Note:
-	for install latest version
-	`$ sudo apt-get install qt-sdk`
+### build
 
-# build
+```sh
+$ git clone https://github.com/sea-kg/inventory-files ~/inventory-files.git
+$ cd ~/inventory-files.git
+$ qmake 
+$ make
+```
 
-	`$ qmake inventory-files.pro && make`
+### run
 
-# run
-
-	`$ ./inventory-files.bin`
-
-	
+```
+$ ./inventory-files
+```

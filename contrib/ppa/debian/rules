@@ -1,39 +1,27 @@
 #!/usr/bin/make -f		
 
-BUILDDIR = build_dir		
-
 # secondly called by launchpad		
-build:		
-	mkdir $(BUILDDIR);
-	cd $(BUILDDIR); cmake -DCMAKE_INSTALL_PREFIX=../debian/tmp/usr ..
-	make -C $(BUILDDIR)
+build:
+	qmake
+	make
 
 # thirdly called by launchpad		
-binary: binary-indep binary-arch		
+binary: binary-indep binary-arch	
 
-binary-indep:		
+binary-indep:
 	# nothing to be done
 
-binary-arch:		
-	cd $(BUILDDIR); cmake -P cmake_install.cmake
-	mkdir debian/tmp/DEBIAN
-	mkdir -p debian/tmp/etc/fhq-server
-	mkdir -p debian/tmp/etc/systemd/system
-	mkdir -p debian/tmp/var/log/fhq-server
-	mkdir -p debian/tmp/usr/share/fhq-server
-	mkdir -p debian/tmp/usr/share/fhq-server/public/games
-	pwd
-	cp install_files/fhq-server.conf.sample debian/tmp/etc/fhq-server/fhq-server.conf
-	cp install_files/fhq-server.service debian/tmp/etc/systemd/system
-	cp install_files/fhq-server.postinst debian/tmp/DEBIAN/postinst
-	cp install_files/fhq-server.config debian/tmp/DEBIAN/config
-	cp -rf install_files/admin-web-site debian/tmp/usr/share/fhq-server
-	dpkg-gencontrol -pfhq-server
+binary-arch:	
+	mkdir -p debian/tmp/usr/bin
+	cp -f inventory-files debian/tmp/usr/bin/
+	dpkg-gencontrol -pinventory-files
 	dpkg --build debian/tmp ..
 
 # firstly called by launchpad		
-clean:		
-	rm -f build		
-	rm -rf $(BUILDDIR)		
+clean:
+	rm -f .qmake.stash
+	rm -f qrc_inventory-files.cpp
+	rm -f Makefile
+	rm -f inventory-files
 
 .PHONY: binary binary-arch binary-indep clean
