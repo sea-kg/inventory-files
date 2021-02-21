@@ -34,4 +34,5 @@ https://launchpad.net/~sea5kg/+archive/ubuntu/inventory-files
 ```
 $ sudo add-apt-repository ppa:sea5kg/inventory-files
 $ sudo apt-get update
+$ sudo apt-get install inventory-files
 ```

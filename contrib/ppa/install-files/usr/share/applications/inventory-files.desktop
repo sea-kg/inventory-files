@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Inventory Files
+Comment=Inventory Files
+Exec=/usr/bin/inventory-files %U
+Icon=inventory-files
+Terminal=false
+Type=Application
+StartupNotify=true
+Encoding=UTF-8
+Categories=Application;

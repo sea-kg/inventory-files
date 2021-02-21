@@ -3,9 +3,6 @@ QT += gui
 QT += widgets
 QT += sql
 
-INCLUDEPATH += 3rdparty/clucene/src/core/
-INCLUDEPATH += 3rdparty/clucene/src/core/CLucene/
-
 TARGET = inventory-files
 CONFIG += console release
 TEMPLATE = app

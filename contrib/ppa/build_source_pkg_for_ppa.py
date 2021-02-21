@@ -95,6 +95,8 @@ shutil.copytree('../../src', './inventory-files/src', symlinks=False, ignore=Non
 shutil.copytree('../../res', './inventory-files/res', symlinks=False, ignore=None)
 shutil.copy2('../../inventory-files.pro', './inventory-files/inventory-files.pro')
 shutil.copy2('../../inventory-files.qrc', './inventory-files/inventory-files.qrc')
+shutil.copy2('../../VERSION', './inventory-files/VERSION')
+shutil.copy2('../../LICENSE', './inventory-files/LICENSE')
 shutil.copytree('./debian', './inventory-files/debian', symlinks=False, ignore=None)
 shutil.copytree('./install-files', './inventory-files/install-files', symlinks=False, ignore=None)
 

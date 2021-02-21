@@ -28,10 +28,12 @@
 *.app
 
 Makefile
-tmp/*
+tmp
 *.bin
 qrc_inventory-files.cpp
 *.pro.user
 www/dist/*
 .qmake.stash
-inventory-files
+/inventory-files
+/contrib/ppa/inventory-files
+/contrib/ppa/inventory-files_*
