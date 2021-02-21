@@ -17,6 +17,7 @@ dists = []
 # https://wiki.ubuntu.com/Releases
 
 dists.append({
+    "name": "Ubuntu 16.04.7 LTS (xenial)",
     "dist_name": "xenial",
     "ppa_name_suffix": "ppa-ubuntu-16-04-xenial-1",
     "end": "April 2021",
@@ -24,6 +25,7 @@ dists.append({
 })
 
 dists.append({
+    "name": "Ubuntu 18.04.5 LTS (bionic)",
     "dist_name": "bionic",
     "ppa_name_suffix": "ppa-ubuntu-18-04-bionic-2",
     "end": "April 2023",
@@ -31,6 +33,7 @@ dists.append({
 })
 
 dists.append({
+    "name": "Ubuntu 20.04.2 LTS (focal)",
     "dist_name": "focal",
     "ppa_name_suffix": "ppa-ubuntu-20-04-focal-2",
     "end": "April 2025",
@@ -38,6 +41,7 @@ dists.append({
 })
 
 dists.append({
+    "name": "Ubuntu 20.10 (groovy)",
     "dist_name": "groovy",
     "ppa_name_suffix": "ppa-ubuntu-20-10-groovy-1",
     "end": "July 2021",
@@ -71,7 +75,7 @@ def clear_all():
     print( " -> Cleanup previous ppa packages")
     onlyfiles = [f for f in os.listdir('./') if os.path.isfile(os.path.join('./', f))]
     for f in onlyfiles:
-        m = re.search(r'^inventory-files_(\d+\.\d+\.\d+)-ppa-ubuntu.*(\.orig\.tar\.gz|source\.changes|_source\.build|_source.ppa.upload|\.tar\.gz|_source\.buildinfo|\.dsc)$', f)
+        m = re.search(r'^inventory-files_(\d+\.\d+\.\d+)-ppa-.*(\.orig\.tar\.gz|source\.changes|_source\.build|_source.ppa.upload|\.tar\.gz|_source\.buildinfo|\.dsc)$', f)
         if m:
             print('Remove file ' + f)
             os.remove(f)
