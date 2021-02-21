@@ -32,7 +32,7 @@ dists.append({
 
 dists.append({
     "dist_name": "focal",
-    "ppa_name_suffix": "ppa-ubuntu-20-04-focal-1",
+    "ppa_name_suffix": "ppa-ubuntu-20-04-focal-2",
     "end": "April 2025",
     "version": "20.04.2 LTS"
 })

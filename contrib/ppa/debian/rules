@@ -12,10 +12,11 @@ binary-indep:
 	# nothing to be done
 
 binary-arch:	
+	pwd
 	mkdir -p debian/tmp/usr/bin
 	cp -f inventory-files debian/tmp/usr/bin/
-	cp -rf inventory-files/install-files/etc debian/tmp
-	cp -rf inventory-files/install-files/usr debian/tmp
+	cp -rf install-files/etc debian/tmp
+	cp -rf install-files/usr debian/tmp
 	mkdir debian/tmp/DEBIAN
 	dpkg-gencontrol -pinventory-files
 	dpkg --build debian/tmp ..
