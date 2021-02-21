@@ -10,6 +10,7 @@
 #include "src/detection/config.h"
 #include "src/detection/css.h"
 #include "src/detection/cvs.h"
+#include "src/detection/detection_object_file.h"
 #include "src/detection/dia.h"
 #include "src/detection/diskimage.h"
 #include "src/detection/directdraw.h"
@@ -66,6 +67,7 @@ Detection::Detection() {
 	m_pDetections.push_back((IDetection *)(new DetectionConfig()));
 	m_pDetections.push_back((IDetection *)(new DetectionCSS()));
 	m_pDetections.push_back((IDetection *)(new DetectionCVS()));
+	m_pDetections.push_back((IDetection *)(new DetectionObjectFile()));
 	m_pDetections.push_back((IDetection *)(new DetectionDia()));
 	m_pDetections.push_back((IDetection *)(new DetectionDiskImage()));
 	m_pDetections.push_back((IDetection *)(new DetectionDirectDraw()));
