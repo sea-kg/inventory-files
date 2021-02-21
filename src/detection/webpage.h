@@ -4,7 +4,7 @@
 #include <QFileInfo>
 #include "idetection.h"
 
-class DetectionWebPage : IDetection {
+class DetectionWebPage : public IDetection {
 	public:
 		virtual void types(QStringList &list);
 		virtual bool isType(const QFileInfo &fi, QString &type, QString &subtype);

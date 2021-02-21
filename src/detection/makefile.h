@@ -4,7 +4,7 @@
 #include <QFileInfo>
 #include "idetection.h"
 
-class DetectionMakefile : IDetection {
+class DetectionMakefile : public IDetection {
 	public:
 		virtual void types(QStringList &list);
 		virtual bool isType(const QFileInfo &fi, QString &type, QString &subtype);

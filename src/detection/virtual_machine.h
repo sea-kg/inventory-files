@@ -4,7 +4,7 @@
 #include <QFileInfo>
 #include "idetection.h"
 
-class DetectionVirtualMachine : IDetection {
+class DetectionVirtualMachine : public IDetection {
 	private:
 		QString m_sType;
 	public:
