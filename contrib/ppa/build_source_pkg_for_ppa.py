@@ -14,25 +14,34 @@ print ("Welcome to preapre ppa package...")
 
 dists = []
 
+# https://wiki.ubuntu.com/Releases
+
 dists.append({
     "dist_name": "xenial",
-    "ppa_name_suffix": "ppa-ubuntu-16-04-xenial",
+    "ppa_name_suffix": "ppa-ubuntu-16-04-xenial-1",
     "end": "April 2021",
-    "version": "16.04 LTS"
+    "version": "16.04.7 LTS"
 })
 
 dists.append({
     "dist_name": "bionic",
-    "ppa_name_suffix": "ppa-ubuntu-18-04-bionic-1",
+    "ppa_name_suffix": "ppa-ubuntu-18-04-bionic-2",
     "end": "April 2023",
-    "version": "18.04 LTS"
+    "version": "18.04.5 LTS"
 })
 
 dists.append({
-    "dist_name": "cosmic",
-    "ppa_name_suffix": "ppa-ubuntu-18-10",
-    "end": "July 2019",
-    "version": "18.10"
+    "dist_name": "focal",
+    "ppa_name_suffix": "ppa-ubuntu-20-04-focal-1",
+    "end": "April 2025",
+    "version": "20.04.2 LTS"
+})
+
+dists.append({
+    "dist_name": "groovy",
+    "ppa_name_suffix": "ppa-ubuntu-20-10-groovy-1",
+    "end": "July 2021",
+    "version": "20.10"
 })
 
 print("Please choose dist name:")
@@ -87,6 +96,7 @@ shutil.copytree('../../res', './inventory-files/res', symlinks=False, ignore=Non
 shutil.copy2('../../inventory-files.pro', './inventory-files/inventory-files.pro')
 shutil.copy2('../../inventory-files.qrc', './inventory-files/inventory-files.qrc')
 shutil.copytree('./debian', './inventory-files/debian', symlinks=False, ignore=None)
+shutil.copytree('./install-files', './inventory-files/install-files', symlinks=False, ignore=None)
 
 print( " -> DONE ")
 

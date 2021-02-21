@@ -14,6 +14,9 @@ binary-indep:
 binary-arch:	
 	mkdir -p debian/tmp/usr/bin
 	cp -f inventory-files debian/tmp/usr/bin/
+	mkdir -p debian/tmp/etc/inventory-files
+	cp -f inventory-files/install-files/config.json debian/tmp/etc/inventory-files/config.json
+	mkdir debian/tmp/DEBIAN
 	dpkg-gencontrol -pinventory-files
 	dpkg --build debian/tmp ..
 
