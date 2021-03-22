@@ -2,6 +2,10 @@
 
 All notable changes to inventory-files project will be documented in this file.
 
+## [v0.0.3] - ??
+
+- Added icon tray and system notifications
+
 ## [v0.0.2] - 2021-02-21 (2021 Feb 21)
 
 - Added detection '*.o' files
