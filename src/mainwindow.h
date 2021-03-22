@@ -16,13 +16,19 @@
 #include <QLineEdit>
 #include <QLabel>
 #include <QComboBox>
+#include <QSystemTrayIcon>
 
 #include "directorymodel.h"
 #include "jobsmodel.h"
 #include "job.h"
+#include "inotify_service.h"
 
-class MainWindow : public QMainWindow {
+class MainWindow : public QMainWindow, public INotifyService {
     Q_OBJECT
+    public:
+        // INotifyService
+        virtual void showSystemMessage(QString, QString) override;
+
     private:
         QSqlDatabase *m_pDB;
         
@@ -56,14 +62,19 @@ class MainWindow : public QMainWindow {
 
         QString m_sWorkDirectory;
         QString m_sVersionApp;
-    private:
+
+        QSystemTrayIcon* m_pTrayIcon;
+        QMenu* m_pTrayIconMenu;
+        QIcon m_appIcon;
+
+        void initTrayIcon();
         void initConnection();
         void initActions();
         void initDirectoryTabs();
         void initFilesTabs();
         void initJobsTabs();
         void terminateJob(QString sPath);
-        
+
     public:
 
         MainWindow(QString sWorkDirectory);
@@ -71,7 +82,8 @@ class MainWindow : public QMainWindow {
     signals:
 
     public slots:
-        
+        void iconActivated(QSystemTrayIcon::ActivationReason);
+
     private slots:
         void actionAbout();
         void btnInsertDirectory();

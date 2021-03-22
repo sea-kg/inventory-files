@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QWheelEvent>
+#include <QMessageBox>
 #include <QMouseEvent>
 #include <QDebug>
 #include <QFileInfo>
@@ -12,7 +13,10 @@
 #include "detection/detection.h"
 #include "scandialog.h"
 
-MainWindow::MainWindow(QString sWorkDirectory) {
+MainWindow::MainWindow(QString sWorkDirectory) : 
+ m_appIcon(QIcon(":/res/inventory-files.png")) {
+    m_pTrayIcon = new QSystemTrayIcon(this);
+
     // Read version
     QFile fileVersion(":/VERSION");
     if (fileVersion.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -27,10 +31,12 @@ MainWindow::MainWindow(QString sWorkDirectory) {
     m_sWorkDirectory = sWorkDirectory;
     setWindowTitle("Inventory-files (" + m_sVersionApp + ")");
     setMinimumSize(1000, 600);
-    QIcon appIcon(":/res/inventory-files.png");
-    setWindowIcon(appIcon);
+    setWindowIcon(m_appIcon);
     initConnection();
     initActions();
+
+    // Tray icon menu
+    initTrayIcon();
 
     // menu
     {
@@ -58,6 +64,44 @@ MainWindow::MainWindow(QString sWorkDirectory) {
     m_pMainLayout->addWidget(m_pTabWidget);
     
     setCentralWidget(m_pTabWidget);
+}
+
+// ---------------------------------------------------------------------
+
+void MainWindow::showSystemMessage(QString sTitle, QString sMessage) {
+    this->m_pTrayIcon->showMessage(sTitle, sMessage);
+}
+
+// ---------------------------------------------------------------------
+
+void MainWindow::initTrayIcon() {
+    // App can exit via Quit menu
+    QAction *pQuitAction = new QAction("&Quit", this);
+    connect(pQuitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
+
+    QMenu *pMenu = new QMenu(this);
+    pMenu->addAction(pQuitAction);
+
+    this->m_pTrayIcon->setIcon(m_appIcon);
+    this->m_pTrayIcon->setContextMenu(pMenu);
+
+    // Displaying the tray icon
+    this->m_pTrayIcon->show();
+
+    // Interaction
+    connect(m_pTrayIcon, &QSystemTrayIcon::activated, this, &MainWindow::iconActivated);
+}
+
+// ---------------------------------------------------------------------
+
+void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason_) {
+  switch (reason_) {
+  case QSystemTrayIcon::Trigger:
+    this->m_pTrayIcon->showMessage("Hello", "You clicked me!");
+    break;
+  default:
+    ;
+  }
 }
 
 // ---------------------------------------------------------------------
@@ -212,7 +256,7 @@ void MainWindow::btnScanDirectory() {
             query.exec();
 
             m_pJobsModel->terminateJob(sPath);
-            m_pJobsModel->runJob(sPath);
+            m_pJobsModel->runJob(sPath, this);
             m_pDirectoryModel->needReset();
         }
     }

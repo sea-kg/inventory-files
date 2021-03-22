@@ -32,7 +32,7 @@ QVariant JobsModel::data(const QModelIndex &index, int role) const {
 			if (index.column() == 0) {
 				return sPath;
 			} else if (index.column() == 1) {
-				return pJob->state();
+				return pJob->getState();
 			} else if (index.column() == 2) {
 				return pJob->countFiles();
 			}
@@ -96,8 +96,8 @@ void JobsModel::terminateJob(QString sPath) {
 
 // ---------------------------------------------------------------------
 
-void JobsModel::runJob(QString sPath) {
-	Job *pJob = new Job(m_pDB, sPath);
+void JobsModel::runJob(QString sPath, INotifyService *pNotifyService) {
+	Job *pJob = new Job(m_pDB, sPath, pNotifyService);
 	if (!m_mapJobs.contains(sPath)) {
 		m_mapJobs[sPath] = pJob;
 		pJob->start();

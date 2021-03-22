@@ -3,6 +3,8 @@ QT += gui
 QT += widgets
 QT += sql
 
+INCLUDEPATH += $$PWD/src/interfaces
+
 TARGET = inventory-files
 CONFIG += console release
 TEMPLATE = app

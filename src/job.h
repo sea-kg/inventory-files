@@ -8,6 +8,7 @@
 #include <QStringList>
 #include <QThread>
 #include "detection/detection.h"
+#include "inotify_service.h"
 
 class Job : public QThread
 {
@@ -19,11 +20,13 @@ class Job : public QThread
 		QStack<QString> m_stackDirs;
 		int m_nCountFiles;
 		QString m_sState;
+		INotifyService *m_pNotifyService;
+
 	public:
-		Job(QSqlDatabase *pDB, QString sStartDir);
+		Job(QSqlDatabase *pDB, QString sStartDir, INotifyService *pNotifyService);
 		
 		int countFiles() const;
-		QString state() const;
+		QString getState() const;
 		
 	protected:
 		void run();

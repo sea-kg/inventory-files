@@ -7,6 +7,7 @@
 #include <QtSql>
 #include <QStringList>
 #include "job.h"
+#include "inotify_service.h"
 
 class JobsModel : public QAbstractTableModel
 {
@@ -25,7 +26,7 @@ class JobsModel : public QAbstractTableModel
 		void needReset();
 		void terminateJob(QString sPath);
 		void terminateAllJobs();
-		void runJob(QString sPath);
+		void runJob(QString sPath, INotifyService *pNotifyService);
 		// void setSearchText(QString sSearchText);
 		// int foundRecords() const;
 	signals:
